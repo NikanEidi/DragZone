@@ -22,10 +22,15 @@ export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, op
   if (collapsed) {
     return (
       <aside className="hidden md:flex flex-col items-center w-[80px] shrink-0 py-6 gap-6 relative z-20 liquid-glass overflow-hidden">
-        {/* Dragon skin texture overlay */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.12]"
-          style={{ backgroundImage: `url(${dragonDrag})`, backgroundSize: "120px auto", backgroundPosition: "center", backgroundRepeat: "repeat", mixBlendMode: "screen" }} />
-        <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.4] dragon-skin-realistic" />
+        {/* Dragon skin texture overlay — HIGH VISIBILITY */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.30]"
+          style={{ backgroundImage: `url(${dragonDrag})`, backgroundSize: "100px auto", backgroundPosition: "center", backgroundRepeat: "repeat", mixBlendMode: "screen" }} />
+        <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.65] dragon-skin-realistic" />
+        {/* Glowing side vein */}
+        <div className="absolute left-0 top-0 bottom-0 w-[3px] z-[5] pointer-events-none" style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(0,240,255,0.5) 20%, rgba(176,38,255,0.7) 50%, rgba(0,240,255,0.5) 80%, transparent)',
+          boxShadow: '2px 0 15px rgba(0,240,255,0.3), 3px 0 25px rgba(176,38,255,0.15)'
+        }} />
         
         <button onClick={onToggleCollapse} className="relative z-10 p-3.5 rounded-[16px] transition-all duration-200 hover:bg-white/5 active:scale-[0.85] mb-2 border border-transparent hover:border-white/10" style={{ color: "#00F0FF" }}>
           <ChevronRight size={22} />
@@ -70,28 +75,30 @@ export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, op
       `}
       style={{ willChange: 'transform' }}>
         
-        {/* ═══ DRAGON SKIN LAYERS ═══ */}
-        {/* Layer 1: Actual dragon SVG from UIcomponents as background texture */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.06]"
-          style={{ backgroundImage: `url(${dragonDrag})`, backgroundSize: "200px auto", backgroundPosition: "center top", backgroundRepeat: "repeat", mixBlendMode: "screen" }} />
+        {/* ═══ DRAGON SKIN LAYERS — MAXIMUM IMPACT ═══ */}
+        {/* Layer 1: Actual dragon SVG — bright and visible */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.18]"
+          style={{ backgroundImage: `url(${dragonDrag})`, backgroundSize: "180px auto", backgroundPosition: "center top", backgroundRepeat: "repeat", mixBlendMode: "screen" }} />
         
-        {/* Layer 2: Procedural dragon leather texture */}
-        <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.5] dragon-skin-realistic" />
+        {/* Layer 2: Rich dragon leather texture */}
+        <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.65] dragon-skin-realistic" />
         
-        {/* Layer 3: Subtle scale shimmer via SVG pattern */}
-        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.08]" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M0 12 Q6 0,12 12 Q18 24,24 12' fill='none' stroke='%2300F0FF' stroke-width='0.5' opacity='0.6'/%3E%3Cpath d='M12 0 Q24 6,12 12 Q0 18,12 24' fill='none' stroke='%23B026FF' stroke-width='0.5' opacity='0.4'/%3E%3C/svg%3E")`,
-          backgroundSize: "24px 24px",
+        {/* Layer 3: Visible scale shimmer via SVG pattern */}
+        <div className="absolute inset-0 pointer-events-none z-0 opacity-[0.15]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Cpath d='M0 10 Q5 0,10 10 Q15 20,20 10' fill='none' stroke='%2300F0FF' stroke-width='0.8' opacity='0.7'/%3E%3Cpath d='M10 0 Q20 5,10 10 Q0 15,10 20' fill='none' stroke='%23B026FF' stroke-width='0.6' opacity='0.5'/%3E%3Ccircle cx='10' cy='10' r='0.8' fill='%2300F0FF' opacity='0.3'/%3E%3C/svg%3E")`,
+          backgroundSize: "20px 20px",
           mixBlendMode: "screen",
         }} />
 
-        {/* Layer 4: Side accent glow veins */}
-        <div className="absolute left-0 top-0 bottom-0 w-[3px] z-[5] pointer-events-none" style={{
-          background: "linear-gradient(to bottom, transparent, rgba(0,240,255,0.3) 20%, rgba(176,38,255,0.5) 50%, rgba(0,240,255,0.3) 80%, transparent)",
-          boxShadow: "0 0 8px rgba(0,240,255,0.2), 2px 0 12px rgba(176,38,255,0.1)",
+        {/* Layer 4: DRAMATIC side glow veins — thick and bright */}
+        <div className="absolute left-0 top-0 bottom-0 w-[4px] z-[5] pointer-events-none" style={{
+          background: "linear-gradient(to bottom, transparent 5%, rgba(0,240,255,0.5) 15%, rgba(176,38,255,0.8) 50%, rgba(0,240,255,0.5) 85%, transparent 95%)",
+          boxShadow: "2px 0 15px rgba(0,240,255,0.3), 4px 0 30px rgba(176,38,255,0.15)",
+          animation: "veinPulse 4s ease-in-out infinite",
         }} />
-        <div className="absolute right-0 top-0 bottom-0 w-[1px] z-[5] pointer-events-none" style={{
-          background: "linear-gradient(to bottom, transparent, rgba(0,240,255,0.15) 30%, rgba(176,38,255,0.2) 50%, rgba(0,240,255,0.15) 70%, transparent)",
+        <div className="absolute right-0 top-0 bottom-0 w-[2px] z-[5] pointer-events-none" style={{
+          background: "linear-gradient(to bottom, transparent 10%, rgba(0,240,255,0.25) 25%, rgba(176,38,255,0.35) 50%, rgba(0,240,255,0.25) 75%, transparent 90%)",
+          boxShadow: "-2px 0 10px rgba(176,38,255,0.1)",
         }} />
 
         {/* ═══ CONTENT ═══ */}

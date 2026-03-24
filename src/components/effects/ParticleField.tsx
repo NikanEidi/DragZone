@@ -22,15 +22,17 @@ export function ParticleField() {
     const HUES = [185, 280, 190, 275, 180]; // Cyan to Neon Purple ranges
 
     function resize() {
-      // Limit to 1.5 dpr for performance
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      // Limit DPR on mobile to 1 to drastically improve fill-rate performance
+      const isMobile = window.innerWidth < 768;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
       w = canvas!.offsetWidth; h = canvas!.offsetHeight;
       canvas!.width = w * dpr; canvas!.height = h * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function spawn() {
-      if (ps.length > 40) return; // Reduced max count slightly for performance
+      const maxP = window.innerWidth < 768 ? 20 : 40;
+      if (ps.length > maxP) return; 
       ps.push({
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.2, vy: -0.08 - Math.random() * 0.15,
