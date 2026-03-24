@@ -2,7 +2,13 @@
 
 ```text
 DragZone/
+├── .github/             # GitHub Actions Workflows
+│   └── workflows/
+│       └── main.yml     # CI/CD Pipeline
 ├── .gemini/             # AI Assistant Configuration
+├── cypress/             # E2E Testing Suite
+│   └── e2e/
+│       └── smoke.cy.ts  # Smoke Tests
 ├── public/              # Static Assets (Logo, Favicon)
 ├── src/                 # Source Code
 │   ├── components/      # UI Layer (Views)
@@ -17,6 +23,7 @@ DragZone/
 │   ├── types/           # Interface Definitions (Models)
 │   ├── styles/          # Design System (Tailwind/CSS)
 │   ├── App.tsx          # Root Component Composition
+│   ├── App.test.tsx     # Root Component Unit Test
 │   └── main.tsx         # React Main Entry
 ├── UIcomponents/        # Design Assets & Ultra High-Res Graphics
 │   ├── Frame/           # Border & Shell Graphics
@@ -28,5 +35,12 @@ DragZone/
 ├── FILE_EXPLAINER.md    # Guide to Key Files
 ├── FOLDER_EXPLAINER.md  # Directory Structure Guide
 ├── FUNCTION_EXPLAINER.md# Documentation of Core Logic
+├── TESTING.md           # Testing Methodology
+├── cypress.config.ts    # Cypress Configuration
+├── jest.config.cjs      # Jest Configuration
+├── jest.setup.ts        # Jest Environment Setup
+├── tsconfig.json        # TypeScript Project Config
+├── tsconfig.node.json   # TypeScript Node Config
+├── tsconfig.jest.json   # TypeScript Jest Override
 └── LICENSE              # MIT License (Nikan Eidi)
 ```

@@ -50,14 +50,28 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.10.0",
     "@types/react": "^19.2.14",
     "@vitejs/plugin-react": "^4.7.0",
+    "cypress": "^15.13.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "start-server-and-test": "^2.1.5",
     "tailwindcss": "4.1.12",
+    "ts-jest": "^29.4.6",
     "vite": "6.3.5"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "test:unit": "jest",
+    "test:unit:watch": "jest --watch",
+    "test:e2e": "start-server-and-test dev http://localhost:5173 'cypress run'",
+    "test:e2e:ci": "start-server-and-test dev http://localhost:5173 'cypress run'",
+    "cypress:open": "cypress open"
   }
 }
