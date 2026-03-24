@@ -1,5 +1,5 @@
 import React from "react";
-import coreImg from "figma:asset/9317dec3d240057a2f1be696f13d7b732ca62087.png";
+import coreImg from "../../assets/dragon-vectorize.svg";
 
 export function PowerCore() {
   return (

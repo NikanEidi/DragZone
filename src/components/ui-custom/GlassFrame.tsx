@@ -1,7 +1,4 @@
 import React from "react";
-import leftS from "figma:asset/72ef9ba9c3fe7532bcac8261fdd9f80d49e9c5ea.png";
-import rightS from "figma:asset/57c3753959b3d37b4e1391d15d015be7d1e0db65.png";
-import bottomS from "figma:asset/6ca909935ac1dce0483657090f1a53e2a4196d6c.png";
 
 interface Props {
   children: React.ReactNode;
@@ -11,12 +8,20 @@ interface Props {
   noScales?: boolean;
 }
 
+/**
+ * Premium glass-morphism frame with dragon-scale SVG borders.
+ * Replaced PNG figma:asset imports with pure CSS/SVG scale patterns.
+ */
 export function GlassFrame({
   children, className = "", accent = "#00F0FF",
   intensity = "mid", noScales = false,
 }: Props) {
   const alphas = { low: { border: "06", glow: "04", inner: "08" }, mid: { border: "0a", glow: "08", inner: "10" }, high: { border: "12", glow: "0f", inner: "18" } };
   const a = alphas[intensity];
+
+  // Inline SVG scale pattern as data URI
+  const scalePatternH = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='8' viewBox='0 0 20 8'%3E%3Cpath d='M0 4Q5 0 10 4Q15 8 20 4' fill='none' stroke='${encodeURIComponent(accent)}' stroke-width='1.5' opacity='0.6'/%3E%3C/svg%3E")`;
+  const scalePatternV = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='20' viewBox='0 0 8 20'%3E%3Cpath d='M4 0Q0 5 4 10Q8 15 4 20' fill='none' stroke='${encodeURIComponent(accent)}' stroke-width='1.5' opacity='0.6'/%3E%3C/svg%3E")`;
 
   return (
     <div className={`relative rounded-[16px] ${className}`}>
@@ -26,13 +31,13 @@ export function GlassFrame({
         boxShadow: `0 0 20px ${accent}${a.glow}`,
       }} />
 
-      {/* L2: Scale borders */}
+      {/* L2: Scale borders — pure SVG patterns */}
       {!noScales && (
         <>
-          <div className="absolute left-0 top-[14px] bottom-[14px] w-[8px] z-20 pointer-events-none" style={{ backgroundImage: `url(${leftS})`, backgroundRepeat: "repeat-y", backgroundSize: "8px auto", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
-          <div className="absolute right-0 top-[14px] bottom-[14px] w-[8px] z-20 pointer-events-none" style={{ backgroundImage: `url(${rightS})`, backgroundRepeat: "repeat-y", backgroundSize: "8px auto", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
-          <div className="absolute bottom-0 left-[14px] right-[14px] h-[8px] z-20 pointer-events-none" style={{ backgroundImage: `url(${bottomS})`, backgroundRepeat: "repeat-x", backgroundSize: "auto 8px", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
-          <div className="absolute top-0 left-[14px] right-[14px] h-[8px] z-20 pointer-events-none" style={{ backgroundImage: `url(${bottomS})`, backgroundRepeat: "repeat-x", backgroundSize: "auto 8px", transform: "scaleY(-1)", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
+          <div className="absolute left-0 top-[14px] bottom-[14px] w-[8px] z-20 pointer-events-none" style={{ backgroundImage: scalePatternV, backgroundRepeat: "repeat-y", backgroundSize: "8px auto", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
+          <div className="absolute right-0 top-[14px] bottom-[14px] w-[8px] z-20 pointer-events-none" style={{ backgroundImage: scalePatternV, backgroundRepeat: "repeat-y", backgroundSize: "8px auto", transform: "scaleX(-1)", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
+          <div className="absolute bottom-0 left-[14px] right-[14px] h-[8px] z-20 pointer-events-none" style={{ backgroundImage: scalePatternH, backgroundRepeat: "repeat-x", backgroundSize: "auto 8px", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
+          <div className="absolute top-0 left-[14px] right-[14px] h-[8px] z-20 pointer-events-none" style={{ backgroundImage: scalePatternH, backgroundRepeat: "repeat-x", backgroundSize: "auto 8px", transform: "scaleY(-1)", filter: `drop-shadow(0 0 5px ${accent}) drop-shadow(0 0 10px ${accent}60)`, opacity: 0.7 }} />
         </>
       )}
 

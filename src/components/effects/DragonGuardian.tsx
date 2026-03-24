@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import dragonHead from "figma:asset/399c1536d7179899acf08cb0ca594c7cf6739472.png";
+import dragonHead from "../../assets/dragon-icon.svg";
 
 export function DragonGuardian() {
   const [m, setM] = useState({ x: 0, y: 0 });
@@ -42,7 +42,6 @@ export function DragonGuardian() {
       ref={ref}
       className="absolute z-[60] pointer-events-none"
       style={{
-        // Significantly scaled down to fit cleanly inside the frame layout
         top: "clamp(10px, 2vw, 24px)",
         right: "clamp(10px, 2vw, 24px)",
         width: "clamp(80px, 12vw, 150px)",
