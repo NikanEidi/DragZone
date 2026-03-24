@@ -1,4 +1,4 @@
-# 📜 Changelog — DragZoneAI (Copy)
+# 📜 Changelog — DragZoneAI (v1.1.3 - Tag 3)
 
 All notable changes to this project will be documented in this file.
 

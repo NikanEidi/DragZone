@@ -120,10 +120,10 @@ export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, op
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={onToggleCollapse} className="hidden md:flex p-2 rounded-[10px] bg-transparent hover:bg-[rgba(255,255,255,0.05)] active:scale-[0.9] transition-all duration-200 text-[#888] hover:text-[#00F0FF]">
+              <button title="Collapse sidebar" onClick={onToggleCollapse} className="hidden md:flex p-2 rounded-[10px] bg-transparent hover:bg-[rgba(255,255,255,0.05)] active:scale-[0.9] transition-all duration-200 text-[#888] hover:text-[#00F0FF]">
                 <PanelLeftClose size={18} />
               </button>
-              <button onClick={onClose} className="md:hidden p-2 rounded-[10px] bg-red-500/10 active:scale-[0.85] transition-all duration-200 border border-red-500/20 text-red-400">
+              <button title="Collapse sidebar" onClick={onClose} className="md:hidden p-2 rounded-[10px] bg-red-500/10 active:scale-[0.85] transition-all duration-200 border border-red-500/20 text-red-400">
                 <ChevronLeft size={20} />
               </button>
             </div>

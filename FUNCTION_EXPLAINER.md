@@ -1,4 +1,4 @@
-# ⚙️ Function Explainer
+# ⚙️ Function Explainer (v1.1.3 - Tag 3)
 
 Key functions and logic flows within the DragZoneAI architecture.
 

@@ -1,4 +1,4 @@
-# 🧪 Testing Documentation - DragZoneAI
+# 🧪 Testing Documentation - DragZoneAI (v1.1.3 - Tag 3)
 
 This project uses a layered testing strategy to ensure high performance and reliability.
 

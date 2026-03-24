@@ -1,4 +1,4 @@
-# 📂 Folder Explainer
+# 📂 Folder Explainer (v1.1.3 - Tag 3)
 
 Detailed breakdown of the directory structure of DragZoneAI.
 
