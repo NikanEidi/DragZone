@@ -57,8 +57,8 @@ export default function App() {
         WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 75%)'
       }} />
 
-      {/* Dragon leather texture with specular lighting */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.25] mix-blend-overlay dragon-skin-base" />
+      {/* Dragon leather texture with specular lighting (Hidden on mobile to save GPU) */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.25] mix-blend-overlay dragon-skin-base hidden sm:block" />
 
       {/* Deep cinematic vignette */}
       <div className="absolute inset-0 pointer-events-none" style={{
@@ -69,56 +69,56 @@ export default function App() {
       <div className="opacity-60 mix-blend-screen"><ParticleField /></div>
       <div className="opacity-50 mix-blend-screen"><CloudVape /></div>
 
-      {/* ═══ DRAGON SKIN FRAME BORDERS ═══ */}
-      <div className="absolute top-0 left-0 right-0 z-[60] pointer-events-none dragon-skin-frame-h">
+      {/* ═══ DRAGON SKIN FRAME BORDERS (Hidden on mobile to save screen space & GPU) ═══ */}
+      <div className="absolute top-0 left-0 right-0 z-[60] pointer-events-none dragon-skin-frame-h hidden sm:block">
         <HorizontalBorder height={44} />
       </div>
-      <div className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none dragon-skin-frame-h" style={{ transform: 'scaleY(-1)' }}>
+      <div className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none dragon-skin-frame-h hidden sm:block" style={{ transform: 'scaleY(-1)' }}>
         <HorizontalBorder height={44} />
       </div>
-      <div className="absolute top-0 bottom-0 left-0 z-[60] pointer-events-none dragon-skin-frame-v">
+      <div className="absolute top-0 bottom-0 left-0 z-[60] pointer-events-none dragon-skin-frame-v hidden sm:block">
         <VerticalBorder width={44} />
       </div>
-      <div className="absolute top-0 bottom-0 right-0 z-[60] pointer-events-none dragon-skin-frame-v" style={{ transform: 'scaleX(-1)' }}>
+      <div className="absolute top-0 bottom-0 right-0 z-[60] pointer-events-none dragon-skin-frame-v hidden sm:block" style={{ transform: 'scaleX(-1)' }}>
         <VerticalBorder width={44} />
       </div>
 
       {/* Dragon Eye Corner Ornaments */}
-      <div className="absolute top-0 left-0 z-[62] pointer-events-none">
+      <div className="absolute top-0 left-0 z-[62] pointer-events-none hidden sm:block">
         <CornerOrnament size={64} rotation={0} />
       </div>
-      <div className="absolute top-0 right-0 z-[62] pointer-events-none">
+      <div className="absolute top-0 right-0 z-[62] pointer-events-none hidden sm:block">
         <CornerOrnament size={64} rotation={90} />
       </div>
-      <div className="absolute bottom-0 right-0 z-[62] pointer-events-none">
+      <div className="absolute bottom-0 right-0 z-[62] pointer-events-none hidden sm:block">
         <CornerOrnament size={64} rotation={180} />
       </div>
-      <div className="absolute bottom-0 left-0 z-[62] pointer-events-none">
+      <div className="absolute bottom-0 left-0 z-[62] pointer-events-none hidden sm:block">
         <CornerOrnament size={64} rotation={270} />
       </div>
 
       {/* ═══ AMBIENT GLOW behind borders ═══ */}
-      <div className="absolute top-0 left-0 right-0 h-[80px] z-[59] pointer-events-none" style={{
+      <div className="absolute top-0 left-0 right-0 h-[80px] z-[59] pointer-events-none hidden sm:block" style={{
         background: "linear-gradient(to bottom, rgba(0,240,255,0.06), transparent)",
         animation: "veinPulse 4s ease-in-out infinite"
       }} />
-      <div className="absolute bottom-0 left-0 right-0 h-[80px] z-[59] pointer-events-none" style={{
+      <div className="absolute bottom-0 left-0 right-0 h-[80px] z-[59] pointer-events-none hidden sm:block" style={{
         background: "linear-gradient(to top, rgba(176,38,255,0.06), transparent)",
         animation: "veinPulse 5s ease-in-out 1s infinite"
       }} />
-      <div className="absolute top-0 bottom-0 left-0 w-[80px] z-[59] pointer-events-none" style={{
+      <div className="absolute top-0 bottom-0 left-0 w-[80px] z-[59] pointer-events-none hidden sm:block" style={{
         background: "linear-gradient(to right, rgba(176,38,255,0.06), transparent)",
         animation: "veinPulse 5s ease-in-out 0.5s infinite"
       }} />
-      <div className="absolute top-0 bottom-0 right-0 w-[80px] z-[59] pointer-events-none" style={{
+      <div className="absolute top-0 bottom-0 right-0 w-[80px] z-[59] pointer-events-none hidden sm:block" style={{
         background: "linear-gradient(to left, rgba(0,240,255,0.06), transparent)",
         animation: "veinPulse 4s ease-in-out 1.5s infinite"
       }} />
 
       {/* ═══ APP LAYOUT ═══ */}
-      <div className="relative z-10 flex flex-col h-full pl-[14px] pr-[14px] sm:pl-[44px] sm:pr-[44px] md:pl-[52px] md:pr-[52px] pt-[14px] sm:pt-[44px] md:pt-[52px] pb-[14px] sm:pb-[44px] md:pb-[52px]">
+      <div className="relative z-10 flex flex-col h-full pl-[2px] pr-[2px] sm:pl-[44px] sm:pr-[44px] md:pl-[52px] md:pr-[52px] pt-[2px] sm:pt-[44px] md:pt-[52px] pb-[4px] sm:pb-[44px] md:pb-[52px]">
         <Header status={status} />
-        <div className="flex flex-1 min-h-0 relative px-[4px] sm:px-[clamp(8px,1vw,16px)] pb-[clamp(4px,1vw,16px)] gap-[clamp(4px,1vw,16px)]">
+        <div className="flex flex-1 min-h-0 relative px-[2px] sm:px-[clamp(8px,1vw,16px)] pb-[clamp(2px,1vw,16px)] gap-[clamp(4px,1vw,16px)]">
           <Sidebar
             conversations={conversations.map(c => ({ id: c.id, title: c.title, count: c.messages.length }))}
             activeId={activeId}
@@ -146,7 +146,11 @@ export default function App() {
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Share+Tech+Mono&display=swap');
 
         * { -webkit-tap-highlight-color: transparent; }
-        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        html, body {
+          -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+          overscroll-behavior-y: none; /* Native app feel for iPad */
+        }
         input, button, textarea { touch-action: manipulation; }
         textarea { -webkit-user-select: text; user-select: text; }
         textarea:focus { outline: none; }
@@ -170,14 +174,16 @@ export default function App() {
           overflow: hidden;
           transition: all 0.3s ease-out;
         }
-        .liquid-glass:hover {
-          border-color: rgba(0,240,255,0.12);
-          box-shadow: 
-            inset 0 1px 1px rgba(255,255,255,0.08),
-            inset 0 -1px 1px rgba(176,38,255,0.06),
-            0 25px 50px rgba(0,0,0,0.8),
-            0 0 60px rgba(0,240,255,0.05),
-            0 0 100px rgba(176,38,255,0.03);
+        @media (hover: hover) and (pointer: fine) {
+          .liquid-glass:hover {
+            border-color: rgba(0,240,255,0.12);
+            box-shadow: 
+              inset 0 1px 1px rgba(255,255,255,0.08),
+              inset 0 -1px 1px rgba(176,38,255,0.06),
+              0 25px 50px rgba(0,0,0,0.8),
+              0 0 60px rgba(0,240,255,0.05),
+              0 0 100px rgba(176,38,255,0.03);
+          }
         }
 
         /* --- DRAGON LEATHER TEXTURE --- */

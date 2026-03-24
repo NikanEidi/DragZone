@@ -21,8 +21,9 @@ export function CloudVape() {
     const clouds: Cloud[] = [];
 
     function resize() {
-      // Lower DPR to 1 to drastically improve fill-rate performance
-      const dpr = Math.min(window.devicePixelRatio || 1, 1);
+      // Lower DPR to 1 on all platforms for heavy radial fill-rate performance
+      // For CloudVape, high res causes massive slowdown on iPad
+      const dpr = 1;
       w = canvas!.offsetWidth;
       h = canvas!.offsetHeight;
       canvas!.width = w * dpr;
@@ -31,7 +32,8 @@ export function CloudVape() {
     }
 
     function spawn() {
-      if (clouds.length > 20) return;
+      const maxC = window.innerWidth < 768 ? 12 : 20;
+      if (clouds.length > maxC) return;
       const fromBottom = Math.random() > 0.2;
       clouds.push({
         x: Math.random() * w,
@@ -42,7 +44,7 @@ export function CloudVape() {
         opacity: 0,
         life: 0,
         max: 500 + Math.random() * 400,
-        hue: Math.random() > 0.5 ? 185 + Math.random() * 15 : 275 + Math.random() * 20, // Cyan or Neon Purple
+        hue: Math.random() > 0.5 ? 185 + Math.random() * 15 : 275 + Math.random() * 20, 
         rotation: Math.random() * Math.PI * 2,
         spinSpeed: (Math.random() - 0.5) * 0.01,
       });
@@ -63,17 +65,17 @@ export function CloudVape() {
         const ratio = c.life / c.max;
         const fadeIn = Math.min(ratio * 5, 1);
         const fadeOut = ratio > 0.5 ? 1 - (ratio - 0.5) / 0.5 : 1;
-        c.opacity = fadeIn * fadeOut * 0.15; 
+        // Bumped baseline opacity slightly since we removed inline CSS contrast/brightness
+        c.opacity = fadeIn * fadeOut * 0.18; 
 
         ctx!.save();
         ctx!.translate(c.x, c.y);
         
-        // Fast rendering mode, no explicit rotations needed for radial gradient unless textured
         const g = ctx!.createRadialGradient(0, 0, 0, 0, 0, c.r);
-        g.addColorStop(0, `hsla(${c.hue}, 100%, 80%, ${c.opacity})`);
-        g.addColorStop(0.3, `hsla(${c.hue}, 80%, 50%, ${c.opacity * 0.8})`);
-        g.addColorStop(0.7, `hsla(${c.hue}, 100%, 20%, ${c.opacity * 0.3})`);
-        g.addColorStop(1, `hsla(${c.hue}, 100%, 10%, 0)`);
+        g.addColorStop(0, `hsla(${c.hue}, 100%, 85%, ${c.opacity})`);
+        g.addColorStop(0.3, `hsla(${c.hue}, 90%, 60%, ${c.opacity * 0.8})`);
+        g.addColorStop(0.7, `hsla(${c.hue}, 100%, 30%, ${c.opacity * 0.3})`);
+        g.addColorStop(1, `hsla(${c.hue}, 100%, 15%, 0)`);
 
         ctx!.fillStyle = g;
         ctx!.beginPath();
@@ -97,5 +99,5 @@ export function CloudVape() {
     return () => { cancelAnimationFrame(animId); ro.disconnect(); };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-[2]" style={{ opacity: 0.8, filter: "contrast(1.2) brightness(1.2)", willChange: 'transform' }} />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-[2]" style={{ opacity: 0.8, willChange: 'transform' }} />;
 }
