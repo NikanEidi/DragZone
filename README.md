@@ -1,4 +1,4 @@
-# 🐉 DragZoneAI (Copy)
+# <img src="UIcomponents/Frame/Icon.svg" width="48" height="48" valign="middle" /> DragZoneAI
 
 **An ultra-premium, cyberpunk-themed AI chat interface optimized for high-performance and deep immersion.**
 
