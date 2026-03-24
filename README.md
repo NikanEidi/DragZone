@@ -11,13 +11,13 @@
 
 ## 🎨 Visual Philosophy
 
-DragZoneAI is not just a chat interface; it's a digital experience. Drawing inspiration from **Cyberpunk aesthetics** and **Dragon motifs**, the UI features:
+DragZoneAI is not just a chat interface; it's a digital experience. Drawing inspiration from **Cyberpunk aesthetics** and **Dragon motifs**, the newly overhauled **Ultra-Premium UI** features:
 
-- **Professional Smoked Liquid Glass**: High-translucency surfaces with 30px backdrop blur and 120% saturation.
-- **Matte Dragon Leather**: Custom SVG-driven textures that provide a tactile, premium feel across the application base.
-- **Ambient Cyber-Aurora**: Slow-moving, breathed gradients of Cyan and Purple that create a living background.
-- **Dragon Guardian**: A vigilant VFX layer that provides a sense of security and identity.
-- **Holographic UI**: Precision borders and glass frames derived from high-fidelity Figma designs.
+- **Ultra-Premium Dragon Skin Borders**: Thick, multi-layered SVG borders with realistic overlapping reptile scales, procedural bump mapping (`feTurbulence`), and animated cyan/purple energy veins.
+- **Glowing Dragon Eye Ornaments**: Responsive corner pieces with pulsing radial gradients and slit-pupil designs.
+- **Deep Space Aurora Backdrops**: An infinitely breathing multi-layered background system combining dark matter radial gradients and cyberpunk particle fields.
+- **Professional Smoked Liquid Glass**: High-translucency surfaces with 40px backdrop blur, drop shadows, and active hover states reflecting ambient light.
+- **Holographic UI**: Precision SVG icons and glass frames derived entirely from huge, high-fidelity source assets (`UIcomponents`), perfectly optimized for the web.
 
 ---
 
@@ -76,6 +76,16 @@ DragZoneAI is not just a chat interface; it's a digital experience. Drawing insp
    ```bash
    npm run build
    ```
+
+
+---
+
+## 🧪 Testing & CI/CD
+
+DragZone AI is built with reliability in mind.
+- **Unit Tests**: `npm run test:unit` to run Jest tests on component logic.
+- **E2E Tests**: `npm run test:e2e:ci` to run Cypress tests headlessly.
+- **CI/CD Pipeline**: GitHub Actions automatically builds, lints, and runs tests for every push to `main` and `feature/enhancement-UI`.
 
 ---
 
