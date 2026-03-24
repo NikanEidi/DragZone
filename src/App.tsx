@@ -6,10 +6,7 @@ import { DragonGuardian } from "./components/effects/DragonGuardian";
 import { ParticleField } from "./components/effects/ParticleField";
 import { CloudVape } from "./components/effects/CloudVape";
 import { useChat } from "./hooks/useChat";
-
-// SVGs / Images that you provided, mapped to the layout
-import topBottomBorder from 'figma:asset/6ca909935ac1dce0483657090f1a53e2a4196d6c.png';
-import leftRightBorder from 'figma:asset/72ef9ba9c3fe7532bcac8261fdd9f80d49e9c5ea.png';
+import { HorizontalBorder, VerticalBorder, CornerOrnament } from "./components/icons/DragonBorderSVG";
 
 export default function App() {
   const {
@@ -22,7 +19,6 @@ export default function App() {
   return (
     <div className="h-[100dvh] w-screen overflow-hidden relative selection:bg-[#B026FF]/40 selection:text-[#FFFFFF]" style={{ background: "#040406" }}>
       {/* ═══ GLOBAL EFFECTS ═══ */}
-      {/* <PencilTrail /> - Temporarily disabled to restore text input focus */}
 
       {/* ═══ BACKGROUND SYSTEM ═══ */}
       
@@ -59,26 +55,43 @@ export default function App() {
       <div className="opacity-50 mix-blend-screen"><ParticleField /></div>
       <div className="opacity-40 mix-blend-screen"><CloudVape /></div>
 
-      {/* ═══ ASSET BORDERS (FROM ATTACHMENTS) ═══ */}
+      {/* ═══ DRAGON SKIN FRAME BORDERS ═══ */}
       {/* Top Border */}
-      <div className="absolute top-0 left-0 right-0 h-[24px] md:h-[32px] z-[60] pointer-events-none opacity-100 mix-blend-screen" 
-           style={{ backgroundImage: `url(${topBottomBorder})`, backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%' }} />
+      <div className="absolute top-0 left-0 right-0 z-[60] pointer-events-none dragon-skin-frame-h">
+        <HorizontalBorder height={40} />
+      </div>
       
       {/* Bottom Border */}
-      <div className="absolute bottom-0 left-0 right-0 h-[24px] md:h-[32px] z-[60] pointer-events-none opacity-100 mix-blend-screen" 
-           style={{ backgroundImage: `url(${topBottomBorder})`, backgroundRepeat: 'repeat-x', backgroundSize: 'auto 100%', transform: 'scaleY(-1)' }} />
+      <div className="absolute bottom-0 left-0 right-0 z-[60] pointer-events-none dragon-skin-frame-h" style={{ transform: 'scaleY(-1)' }}>
+        <HorizontalBorder height={40} />
+      </div>
       
       {/* Left Border */}
-      <div className="absolute top-0 bottom-0 left-0 w-[24px] md:w-[32px] z-[60] pointer-events-none opacity-100 mix-blend-screen" 
-           style={{ backgroundImage: `url(${leftRightBorder})`, backgroundRepeat: 'repeat-y', backgroundSize: '100% auto' }} />
+      <div className="absolute top-0 bottom-0 left-0 z-[60] pointer-events-none dragon-skin-frame-v">
+        <VerticalBorder width={40} />
+      </div>
       
       {/* Right Border */}
-      <div className="absolute top-0 bottom-0 right-0 w-[24px] md:w-[32px] z-[60] pointer-events-none opacity-100 mix-blend-screen" 
-           style={{ backgroundImage: `url(${leftRightBorder})`, backgroundRepeat: 'repeat-y', backgroundSize: '100% auto', transform: 'scaleX(-1)' }} />
+      <div className="absolute top-0 bottom-0 right-0 z-[60] pointer-events-none dragon-skin-frame-v" style={{ transform: 'scaleX(-1)' }}>
+        <VerticalBorder width={40} />
+      </div>
 
+      {/* Dragon Eye Corner Ornaments */}
+      <div className="absolute top-0 left-0 z-[62] pointer-events-none">
+        <CornerOrnament size={60} rotation={0} />
+      </div>
+      <div className="absolute top-0 right-0 z-[62] pointer-events-none">
+        <CornerOrnament size={60} rotation={90} />
+      </div>
+      <div className="absolute bottom-0 right-0 z-[62] pointer-events-none">
+        <CornerOrnament size={60} rotation={180} />
+      </div>
+      <div className="absolute bottom-0 left-0 z-[62] pointer-events-none">
+        <CornerOrnament size={60} rotation={270} />
+      </div>
 
       {/* ═══ APP LAYOUT ═══ */}
-      <div className="relative z-10 flex flex-col h-full pl-[8px] pr-[8px] sm:pl-[28px] sm:pr-[28px] md:pl-[40px] md:pr-[40px] pt-[8px] sm:pt-[28px] md:pt-[40px] pb-[8px] sm:pb-[28px] md:pb-[40px]">
+      <div className="relative z-10 flex flex-col h-full pl-[12px] pr-[12px] sm:pl-[40px] sm:pr-[40px] md:pl-[48px] md:pr-[48px] pt-[12px] sm:pt-[40px] md:pt-[48px] pb-[12px] sm:pb-[40px] md:pb-[48px]">
         <Header status={status} />
         <div className="flex flex-1 min-h-0 relative px-[4px] sm:px-[clamp(8px,1vw,16px)] pb-[clamp(4px,1vw,16px)] gap-[clamp(4px,1vw,16px)]">
           <Sidebar
@@ -160,6 +173,7 @@ export default function App() {
           0%,100% { filter: drop-shadow(0 0 8px rgba(0,240,255,0.2)) drop-shadow(0 0 15px rgba(176,38,255,0.2)); }
           50% { filter: drop-shadow(0 0 12px rgba(0,240,255,0.3)) drop-shadow(0 0 20px rgba(176,38,255,0.3)); }
         }
+        @keyframes hexSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes pulseGlow { 0%,100% { opacity: 0.2; } 50% { opacity: 0.5; } }
         @keyframes typingBounce { 0%,100% { transform: translate3d(0,0,0) scale(0.7); opacity: 0.2; } 50% { transform: translate3d(0,-4px,0) scale(1.1); opacity: 1; } }
         @keyframes messageIn { from { opacity: 0; transform: translate3d(0,12px,0) scale(0.98); } to { opacity: 1; transform: translate3d(0,0,0) scale(1); } }
@@ -167,6 +181,22 @@ export default function App() {
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes pingOut { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(3); opacity: 0; } }
         @keyframes waveform { 0% { height: 12%; } 100% { height: 85%; } }
+        @keyframes orbitSpin { from { transform: translate(-50%,-50%) rotateX(70deg) rotate(0deg); } to { transform: translate(-50%,-50%) rotateX(70deg) rotate(360deg); } }
+        @keyframes coreZoom { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+        /* Dragon skin frame border animations */
+        @keyframes veinPulse {
+          0%, 100% { filter: drop-shadow(0 0 4px rgba(0,240,255,0.15)); }
+          50% { filter: drop-shadow(0 0 8px rgba(0,240,255,0.3)) drop-shadow(0 0 12px rgba(176,38,255,0.15)); }
+        }
+        .dragon-skin-frame-h {
+          animation: veinPulse 4s ease-in-out infinite;
+          will-change: filter;
+        }
+        .dragon-skin-frame-v {
+          animation: veinPulse 5s ease-in-out 1s infinite;
+          will-change: filter;
+        }
 
         .graffiti-text {
           font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'MS PMincho', serif;

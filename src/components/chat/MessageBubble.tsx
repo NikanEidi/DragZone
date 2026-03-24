@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { User, Copy, Check, Paperclip } from "lucide-react";
 import type { Message } from "../../types/chat";
-import dragonIcon from "figma:asset/d4e91d23b9ec3a1c291e712a4ea1d27fc6f6fb52.png";
+import dragonIcon from "../../assets/dragon-layer.svg";
 
 interface Props {
   message: Message;

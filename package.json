@@ -70,8 +70,8 @@
     "build": "vite build",
     "test:unit": "jest",
     "test:unit:watch": "jest --watch",
-    "test:e2e": "start-server-and-test dev http://localhost:5173 'cypress run'",
-    "test:e2e:ci": "start-server-and-test dev http://localhost:5173 'cypress run'",
+    "test:e2e": "start-test dev 3000 'cypress run'",
+    "test:e2e:ci": "start-test dev 3000 'cypress run --browser electron --headless'",
     "cypress:open": "cypress open"
   }
 }
