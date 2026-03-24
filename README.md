@@ -1,7 +1,8 @@
-# <img src="UIcomponents/Frame/Icon.svg" width="48" height="48" valign="middle" /> DragZoneAI
+# <img src="UIcomponents/Frame/Icon.svg" width="48" height="48" valign="middle" /> DragZone AI Assistant (v1.1.3 - Tag 3)
 
-**An ultra-premium, cyberpunk-themed AI chat interface optimized for high-performance and deep immersion.**
-
+[![CI/CD Testing Pipeline](https://github.com/NikanEidi/DragZone/actions/workflows/main.yml/badge.svg)](https://github.com/NikanEidi/DragZone/actions)
+![UI Version](https://img.shields.io/badge/UI_Status-Backend_Ready-00F0FF?style=for-the-badge&logo=react&labelColor=1a1a2e)
+![Testing](https://img.shields.io/badge/Tests-Pass-B026FF?style=for-the-badge&logo=jest)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)

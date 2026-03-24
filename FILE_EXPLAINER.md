@@ -1,4 +1,4 @@
-# 📄 File Explainer
+# 📄 File Explainer (v1.1.3 - Tag 3)
 
 Key files in the DragZoneAI project and their responsibilities.
 
