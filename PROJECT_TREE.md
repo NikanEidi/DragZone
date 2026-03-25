@@ -28,6 +28,21 @@ DragZone/
 ├── UIcomponents/        # Design Assets & Ultra High-Res Graphics
 │   ├── Frame/           # Border & Shell Graphics
 │   └── Icon.svg         # Dragon Head Branded Icon
+├── start_dragon.sh      # Unified Bootloader (Frontend + Backend)
+├── DragEngine/          # FastAPI Omni-Parser Backend
+│   ├── main.py          # FastAPI Entry Point
+│   ├── requirements.txt # Backend Dependencies
+│   ├── api/             # API Router Layer
+│   │   └── routers/
+│   │       ├── chat.py   # Streaming Chat Router
+│   │       └── upload.py # Multi-Modal Upload Router
+│   ├── services/        # Logic Layer
+│   │   └── parser.py    # Omni-Parser Implementation
+│   ├── core/            # Config & Infrastructure
+│   │   └── llm.py       # Ollama Client Singleton
+│   ├── models/          # Data Schemas
+│   │   └── chat.py      # Pydantic Chat Models
+│   └── test_main.py     # Backend Unit Tests
 ├── README.md            # Modern Documentation Hub
 ├── ARCHITECTURE.md      # Engineering Deep-Dive
 ├── CHANGELOG.md         # Version Tracking (v1.1.1)
