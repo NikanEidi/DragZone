@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { ChatArea } from './ChatArea';
 import '@testing-library/jest-dom';
 
@@ -7,7 +7,9 @@ describe('ChatArea Component', () => {
   const defaultProps = {
     messages: [],
     status: 'idle' as const,
+    contextActive: false,
     onSend: jest.fn(),
+    onUpload: jest.fn().mockResolvedValue(true),
     onShare: jest.fn(),
     onToggleSidebar: jest.fn(),
   };
@@ -20,7 +22,7 @@ describe('ChatArea Component', () => {
 
   it('renders EmptyState when there are no messages', () => {
     render(<ChatArea {...defaultProps} />);
-    expect(screen.getByText('DRAGZONE ACTIVE')).toBeInTheDocument();
+    expect(screen.getByText('DRAGZONE READY')).toBeInTheDocument();
   });
 
   it('renders messages correctly', () => {
@@ -35,12 +37,12 @@ describe('ChatArea Component', () => {
     expect(screen.getByText('Hi there')).toBeInTheDocument();
     
     // Empty state should not be visible
-    expect(screen.queryByText('DRAGZONE ACTIVE')).not.toBeInTheDocument();
+    expect(screen.queryByText('DRAGZONE READY')).not.toBeInTheDocument();
   });
 
   it('renders TypingIndicator when status is typing', () => {
     render(<ChatArea {...defaultProps} status="typing" />);
-    // Typing indicator has text Processing...
-    expect(screen.getByText('Processing...')).toBeInTheDocument();
+    // Typing indicator has text PARSING...
+    expect(screen.getByText('PARSING...')).toBeInTheDocument();
   });
 });

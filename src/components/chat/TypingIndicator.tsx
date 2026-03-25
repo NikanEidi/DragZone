@@ -14,13 +14,13 @@ export function TypingIndicator() {
           <div className="flex items-center gap-[3px]">
             {[0, 1, 2].map(i => (
               <div key={i} className="rounded-full animate-[typingBounce_1.4s_ease-in-out_infinite]"
-                style={{ width: "clamp(4px,0.45vw,5px)", height: "clamp(4px,0.45vw,5px)", background: "#00F0FF",
-                  boxShadow: "0 0 5px #00F0FF", animationDelay: `${i * 0.15}s` }} />
+                style={{ width: "clamp(4px,0.45vw,5px)", height: "clamp(4px,0.45vw,5px)", background: "var(--cyan)",
+                  boxShadow: "0 0 5px var(--cyan)", animationDelay: `${i * 0.15}s` }} />
             ))}
           </div>
           <span className="animate-[textFlicker_2.5s_ease-in-out_infinite]" style={{
-            fontFamily: "'Exo 2',sans-serif", fontSize: "clamp(10px,1vw,12px)", color: "#3A5048", letterSpacing: "1px"
-          }}>Processing...</span>
+            fontFamily: "'Share Tech Mono', monospace", fontSize: "clamp(10px,1vw,12px)", color: "var(--cyan)", letterSpacing: "1.5px", fontWeight: 700
+          }}>PARSING...</span>
         </div>
       </div>
     </div>

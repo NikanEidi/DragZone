@@ -6,12 +6,14 @@ interface Props {
   label: string;
   color: string;
   pulse?: boolean;
+  onClick?: () => void;
 }
 
-export function StatusPill({ icon: Icon, label, color, pulse }: Props) {
+export function StatusPill({ icon: Icon, label, color, pulse, onClick }: Props) {
   return (
     <div
-      className="flex items-center gap-[5px] px-[clamp(8px,0.9vw,12px)] py-[3px] rounded-full transition-all duration-300 hover:scale-105 cursor-default select-none"
+      onClick={onClick}
+      className="flex items-center gap-[5px] px-[clamp(8px,0.9vw,12px)] py-[3px] rounded-full transition-all duration-300 hover:scale-105 cursor-pointer active:scale-95 select-none"
       style={{ background: `${color}08`, border: `1px solid ${color}15` }}
     >
       <div className="relative">

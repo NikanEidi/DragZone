@@ -33,7 +33,7 @@ export function useChat() {
     Array.from(files).forEach(f => formData.append("files", f));
 
     try {
-      const res = await fetch("http://localhost:8000/api/upload", {
+      const res = await fetch(`http://${window.location.hostname}:8000/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -86,7 +86,7 @@ export function useChat() {
 
     try {
       // 3. POST to Engine Backend
-      const response = await fetch("http://localhost:8000/api/chat", {
+      const response = await fetch(`http://${window.location.hostname}:8000/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

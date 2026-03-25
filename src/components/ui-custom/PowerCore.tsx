@@ -1,9 +1,13 @@
 import React from "react";
 import coreImg from "../../assets/dragon-vectorize.svg";
 
-export function PowerCore() {
+export function PowerCore({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="relative shrink-0" style={{ width: "clamp(38px,4.5vw,52px)", height: "clamp(38px,4.5vw,52px)" }}>
+    <div 
+      onClick={onClick}
+      className="relative shrink-0 cursor-pointer group active:scale-95 transition-transform" 
+      style={{ width: "clamp(38px,4.5vw,52px)", height: "clamp(38px,4.5vw,52px)" }}
+    >
       {/* Spinning hex ring — multi-color with hardware acceleration */}
       <div className="absolute inset-[-2px] animate-[hexSpin_8s_linear_infinite]" style={{
         clipPath: "polygon(50% 0%,93% 25%,93% 75%,50% 100%,7% 75%,7% 25%)",

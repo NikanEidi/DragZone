@@ -66,6 +66,8 @@ describe('App Component', () => {
       newConversation: jest.fn(),
       deleteConversation: jest.fn(),
       shareConversation: jest.fn(),
+      uploadFiles: jest.fn(),
+      activeContext: ""
     });
   });
 

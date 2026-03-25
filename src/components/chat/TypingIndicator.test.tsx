@@ -6,6 +6,6 @@ import '@testing-library/jest-dom';
 describe('TypingIndicator Component', () => {
   it('renders typing dots with correct animation classes', () => {
     render(<TypingIndicator />);
-    expect(screen.getByText('Processing...')).toBeInTheDocument();
+    expect(screen.getByText('PARSING...')).toBeInTheDocument();
   });
 });

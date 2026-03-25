@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 describe('EmptyState Component', () => {
   it('renders correctly', () => {
     render(<EmptyState />);
-    expect(screen.getByText('DRAGZONE ACTIVE')).toBeInTheDocument();
+    expect(screen.getByText('DRAGZONE READY')).toBeInTheDocument();
     expect(screen.getByText('Initialize neural link to begin transmission')).toBeInTheDocument();
     expect(screen.getByText(/LATENCY 0\.003ms/)).toBeInTheDocument();
   });
