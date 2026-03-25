@@ -1,8 +1,12 @@
-# 📜 Changelog — DragZoneAI (v1.1.3 - Tag 3)
-
-All notable changes to this project will be documented in this file.
-
 ---
+
+## [1.2.0] - 2026-03-24
+### 🐉 Cyber Dragon UI/UX Finalization
+- **Titan Mascot Integration**: Added a high-fidelity, high-visibility static Dragon Guardian signature to the header.
+- **Visual Surgery**: Removed all "ghosting" effects and blurs to restore 100% crispness to signature branding.
+- **Dynamic Connection Sync**: Integrated all header, sidebar, and chat-area status pills with a functional **System Status Overlay**.
+- **User Action Overhaul**: Re-engineered all header and context-menu buttons (Copy, Download, New Session, Trash) with robust error handling and tactile feedback.
+- **Bug Fix — Download Engine**: Resolved a critical "Lost Connection" state caused by blocking `window.prompt` calls during document downloads.
 
 ## [1.1.1] - 2026-03-24
 ### 🧪 Testing & CI/CD
