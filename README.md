@@ -8,7 +8,7 @@
 
 **DRAGZONE** is a high-performance, neural-linked AI workspace. Forged in the fires of specialized cyberpunk design, it transcends the boundaries of standard AI interfaces to provide a truly immersive, local-first engine for developers, researchers, and technical architects.
 
-<img src="./public/og-image.png" alt="DragZone UI Preview" width="100%" />
+
 
 </div>
 
