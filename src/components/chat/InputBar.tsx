@@ -151,13 +151,13 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
               onClick={() => setMenuOpen(!menuOpen)}
               onMouseEnter={() => setAttachHov(true)}
               onMouseLeave={() => setAttachHov(false)}
-              className="p-2.5 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center"
+              className="p-3 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
               style={{
                 background: menuOpen ? "rgba(255,255,255,0.08)" : "transparent",
                 color: attachHov || menuOpen ? "#00F0FF" : "#666",
               }}
             >
-              <Plus size={20} style={{ 
+              <Plus size={22} style={{ 
                 transform: menuOpen ? "rotate(45deg)" : "rotate(0)", 
                 transition: "transform 0.2s ease-out",
               }} />
@@ -219,11 +219,11 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
                 onClick={onShare}
                 onMouseEnter={() => setShareHov(true)}
                 onMouseLeave={() => setShareHov(false)}
-                className="p-2.5 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center"
+                className="p-3 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
                 style={{ color: shareHov ? "#4A9BD9" : "#666" }}
                 title="Share Context"
               >
-                <Share2 size={18} />
+                <Share2 size={20} />
               </button>
             )}
 
@@ -232,14 +232,14 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
               onMouseEnter={() => setSendHov(true)}
               onMouseLeave={() => setSendHov(false)}
               disabled={!has}
-              className="p-2.5 rounded-[12px] transition-all duration-300 ease-out active:scale-[0.95] flex items-center justify-center relative overflow-hidden group"
+              className="p-3 rounded-[12px] transition-all duration-300 ease-out active:scale-[0.95] flex items-center justify-center relative overflow-hidden group min-w-[44px] min-h-[44px]"
               style={{
                 background: has ? "rgba(0, 240, 255, 0.1)" : "transparent",
                 color: has ? "#00F0FF" : "#444",
                 cursor: has ? "pointer" : "default",
               }}
             >
-              <Send size={18} style={{
+              <Send size={20} style={{
                 transform: sendHov && has ? "translateX(2px) translateY(-2px)" : "translateX(0) translateY(0)",
                 transition: "all 0.2s ease-out"
               }} />

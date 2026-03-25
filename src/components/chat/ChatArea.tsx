@@ -19,6 +19,7 @@ interface Props {
 export function ChatArea({ messages, status, contextActive, onSend, onUpload, onShare, onToggleSidebar }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showScroll, setShowScroll] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -30,9 +31,50 @@ export function ChatArea({ messages, status, contextActive, onSend, onUpload, on
     setShowScroll(scrollHeight - scrollTop - clientHeight > 80);
   }, []);
 
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.dataTransfer.types.includes('Files')) setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = useCallback(async (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      await onUpload(e.dataTransfer.files);
+    }
+  }, [onUpload]);
+
   return (
-    <div className="flex-1 flex flex-col min-w-0 relative z-10 liquid-glass shadow-[0_15px_40px_rgba(0,0,0,0.8)]">
+    <div 
+      className={`flex-1 flex flex-col min-w-0 relative z-10 liquid-glass shadow-[0_15px_40px_rgba(0,0,0,0.8)] transition-colors duration-300 ${isDragging ? 'bg-[#00F0FF]/5' : ''}`}
+      onDragOver={handleDragOver}
+      onDragEnter={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
       
+      {/* Drag & Drop Overlay */}
+      {isDragging && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-[#0a0e16]/80 backdrop-blur-sm border-2 border-dashed border-[#00F0FF]/50 rounded-[20px] m-4 pointer-events-none">
+          <div className="flex flex-col items-center gap-4 p-8 rounded-[20px] bg-[#00F0FF]/10 border border-[#00F0FF]/20 shadow-[0_0_40px_rgba(0,240,255,0.2)]">
+            <div className="p-4 rounded-full bg-[#00F0FF]/20 text-[#00F0FF] animate-bounce">
+              <ShieldCheck size={48} />
+            </div>
+            <h3 className="text-xl font-bold text-[#E0E0E0] tracking-wide uppercase font-['system-ui']">Drop Files to Omni-Parse</h3>
+            <p className="text-[#00F0FF] text-sm opacity-80">Supports PDF, CSV, Excel, PPTX, Docx, Images</p>
+          </div>
+        </div>
+      )}
+
       {/* Subdued internal gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,240,255,0.015)] to-[rgba(176,38,255,0.015)] pointer-events-none z-0" />
 

@@ -160,7 +160,7 @@ export function MessageBubble({ message: m, index }: Props) {
                                 </div>
                             </div>
                             {/* CodeFrame Body */}
-                            <div className="overflow-x-auto text-[13px] sm:text-[14px]">
+                            <div className="overflow-auto text-[13px] sm:text-[14px] max-h-[500px]" style={{ scrollbarWidth: "thin", scrollbarColor: "#333 #0d1117" }}>
                                 <SyntaxHighlighter
                                   style={vscDarkPlus}
                                   language={language}
