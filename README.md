@@ -1,96 +1,35 @@
-# <img src="UIcomponents/Frame/Icon.svg" width="60" height="60" valign="middle" /> DragZone: The Cyber Dragon Protocol (v1.2.0)
+# 🐉 DrafZone: Premium Cyber Dragon ecosystem.
 
-[![CI/CD Pipeline](https://github.com/NikanEidi/DragZone/actions/workflows/main.yml/badge.svg)](https://github.com/NikanEidi/DragZone/actions)
-![UI Status](https://img.shields.io/badge/UI_Status-Enterprise_Hardened-00F0FF?style=for-the-badge&logo=react)
-![Backend](https://img.shields.io/badge/Backend-FastAPI_Modular-9055E0?style=for-the-badge&logo=fastapi)
-![Testing](https://img.shields.io/badge/Full_Stack_Tests-100%25_Pass-B026FF?style=for-the-badge)
+A high-performance, premium AI experience focused on document parsing, technical research, and intelligent workflow automation.
 
----
+## 📱 Quick Start for iPad/Mobile
 
-## 🐉 The Vision
-**DragZone** is an enterprise-grade, multi-modal AI ecosystem built for speed, beauty, and absolute data synthesis. It combines a high-fidelity **Cyberpunk React Architecture** with a modular **FastAPI Omni-Parser Engine**, designed to analyze everything from PDFs and Spreadsheets to live Image feeds and source code.
+1.  **Launch the System**: Run `./start_dragon.sh` on your Mac.
+2.  **IP Access**: Note the IP address displayed: `http://XXX.XXX.XXX.XXX:5173`.
+3.  **Safari iPad**: Open the URL on your iPad Safari.
+4.  **Home Screen Shortcut**: Tap **'Share'** > **'Add to Home Screen'** for the full-screen immersive experience.
 
----
+## ✨ Intelligent Commands
 
-## 🚀 Unified Startup (Quick Start)
+-   **#note**: Triggers a stylized note formatting block.
+-   **#quiz**: Triggers highly visible, color-coded interactive quiz blocks.
+-   **#workflow**: Orchestrates multi-step code and reasoning generation.
 
-The entire ecosystem (Frontend + Backend) can now be launched with a single command:
+## 🛠️ Dynamic Download Engine
 
-```bash
-# 1. Clone & Enter
-git clone https://github.com/NikanEidi/DragZone.git
-cd DragZone
+When the system generates scripts (Python, Java, Yaml, etc.), click the **Download icon** on the code block. The system will **intelligently infer** the filename:
+-   `class MyService` -> `MyService.java`
+-   `def analytical_engine()` -> `analytical_engine.py`
+-   Workflow configs -> `workflow_config.yml`
 
-# 2. Setup (If first time)
-npm install
-pip install -r DragEngine/requirements.txt
+## 📦 Omni-Parser Extensions
 
-# 3. IGNITE THE DRAGON
-./start_dragon.sh
-```
+The system supports a wide range of file types for AI context injection:
+**PDF, Word, PowerPoint, Excel, CSV, HTML, JPG, PNG.**
 
-> [!TIP]
-> The `start_dragon.sh` script manages all child processes. Pressing **Ctrl+C** will gracefully kill both the FastAPI engine and the Vite server, preventing ghost processes.
+## 🛑 Security & Privacy
 
----
-
-## 🧠 DragEngine: The Omni-Parser
-
-Located in `/DragEngine`, this modular Python service powers the heavy lifting:
-
-- **PDF Synthesis**: High-fidelity text extraction via `pypdf`.
-- **Office Suite**: Full support for `.docx` (Word), `.pptx` (PowerPoint), and `.xlsx` (Excel).
-- **Data Tables**: Spreadsheets are parsed into Markdown tables, allowing the AI to reason over tabular data perfectly.
-- **Vision Feed**: Integrated **LLaVA** support for technical image description.
-- **SSE Streaming**: Server-Sent Events deliver AI responses in real-time with a typewriter effect.
+All processing is handled **locally** via Ollama. No data leaves your machine.
 
 ---
-
-## 📱 Multi-Device Excellence & Apple Pencil
-
-DragZone is optimized for the professional mobile workspace:
-
-- **iPad Air / Pro Ready**: Precision touch targets (44x44px) and native touch event handling for the **Apple Pencil**.
-- **Responsive Fluidity**: Uses CSS `clamp()` and isolated Canvas rendering to maintain 60FPS on high-refresh mobile displays.
-- **Liquid Glass UI**: Multi-layered SVG frames and recursive scale animations that adapt perfectly to MacBook 14" or iPad Portrait layouts.
-
----
-
-## 🧪 Testing Infrastructure
-
-We maintain 100% green coverage across the stack:
-
-| Layer | Environment | Command |
-| :--- | :--- | :--- |
-| **Frontend** | Jest + RTL | `npm run test:unit` |
-| **Backend** | Pytest | `cd DragEngine && pytest` |
-| **Pipeline** | GitHub Actions | Automatic on `main` push |
-
----
-
-## 📂 Architecture Overview
-
-```text
-DragZone/
-├── start_dragon.sh      # Unified Bootloader
-├── src/                 # React Frontend (Vite + TS)
-│   ├── components/      # Glassmorphic UI & VFX
-│   ├── hooks/           # AI Controllers (useChat)
-├── DragEngine/          # FastAPI Engine (Python)
-│   ├── api/routers/     # Modular Endpoints
-│   ├── services/        # Omni-Parser Logic
-│   ├── core/            # LLM Proxy Client
-├── UIcomponents/        # UHD Source Assets
-└── .github/workflows/   # CI/CD (Node + Python)
-```
-
----
-
-## 👨‍💻 Author
-**Nikan Eidi**  
-*Principal Architect & UI Designer*
-
----
-
-## 📜 License
-MIT License - 2026 DragZone Protocol.
+*Built for MacBook 14", iPad Air, and Apple Pencil interaction.*
