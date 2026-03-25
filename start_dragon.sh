@@ -9,6 +9,9 @@ RED='\033[0;31m'; CYAN='\033[0;36m'; GREEN='\033[0;32m'; NC='\033[0m'; BOLD='\03
 echo -e "${CYAN}${BOLD}═══ DRAFZONE ENGINE ═══${NC}"
 echo ""
 
+# Absolute path setup
+ROOT_DIR="/Users/kuroko/Desktop/DragZone"
+
 # Kill any existing processes on our ports
 for PORT in 8000 3000; do
   PID=$(lsof -ti:$PORT 2>/dev/null || true)
@@ -32,15 +35,14 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 # Start backend
-echo -e "${GREEN}▸ Starting FastAPI backend on 0.0.0.0:8000${NC}"
-cd DragEngine && uvicorn main:app --host 0.0.0.0 --port 8000 --reload &
+echo -e "${GREEN}▸ Starting FastAPI backend on 0.0.0.0:8000 (Logs in backend.log)${NC}"
+cd "$ROOT_DIR/DragEngine" && uvicorn main:app --host 0.0.0.0 --port 8000 --reload > "$ROOT_DIR/backend.log" 2>&1 &
 BACK_PID=$!
-cd ..
 
 # Start frontend
-echo -e "${GREEN}▸ Starting Vite frontend on 0.0.0.0:3000${NC}"
-# Use explicit directory to avoid ENOENT if run from outside
-(cd /Users/kuroko/Desktop/DragZone && npm run dev -- --host 0.0.0.0) &
+echo -e "${GREEN}▸ Starting Vite frontend on 0.0.0.0:3000 (Logs in frontend.log)${NC}"
+# Use absolute paths to avoid directory issues
+(cd "$ROOT_DIR" && npm run dev -- --host 0.0.0.0 > "$ROOT_DIR/frontend.log" 2>&1) &
 FRONT_PID=$!
 
 sleep 2

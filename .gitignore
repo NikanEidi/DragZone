@@ -31,6 +31,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+backend.log
+frontend.log
+/tmp/
 
 # Editor specific
 .vscode/
