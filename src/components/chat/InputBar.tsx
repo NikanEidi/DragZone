@@ -108,10 +108,12 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
         <div className="flex items-end gap-2 px-3 py-2.5">
           {/* Attach menu */}
           <div className="relative shrink-0 attach-menu-container z-[40]">
-            <button onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center justify-center rounded-md hover:bg-white/5 active:scale-95 min-w-[44px] min-h-[44px]"
-              style={{ color: menuOpen ? "var(--cyan)" : "var(--text-muted)", transition: "color 100ms" }}>
-              <Plus size={20} style={{ transform: menuOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 150ms" }} />
+            <button 
+              onClick={(e) => { e.preventDefault(); setMenuOpen(!menuOpen); }}
+              className="flex items-center justify-center rounded-md hover:bg-white/5 active:scale-95 min-w-[44px] min-h-[44px] border border-transparent hover:border-white/10"
+              style={{ color: menuOpen ? "var(--cyan)" : "var(--text-muted)", transition: "all 150ms ease" }}
+            >
+              <Plus size={24} className="pointer-events-none" style={{ transform: menuOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 200ms cubic-bezier(0.4, 0, 0.2, 1)" }} />
             </button>
             {menuOpen && (
               <div className="absolute bottom-[calc(100%+12px)] left-0 p-1.5 rounded-lg min-w-[190px] z-[9999]"
