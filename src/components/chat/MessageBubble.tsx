@@ -194,12 +194,34 @@ export function MessageBubble({ message: m, index }: Props) {
                     li: ({node, ...props}) => <li className="pl-1" {...props} />,
                     
                     // Header styles
-                    h1: ({node, ...props}) => <h1 className="text-xl font-bold mt-6 mb-3 text-[#00F0FF]" {...props} />,
-                    h2: ({node, ...props}) => <h2 className="text-lg font-bold mt-5 mb-2 text-[#E0E0E0]" {...props} />,
+                    h1: ({node, ...props}) => {
+                      const text = String(props.children);
+                      if (text.toLowerCase().includes('quiz')) {
+                        return (
+                          <div className="relative my-8 p-6 rounded-[16px] overflow-hidden border border-[#00F0FF]/30 bg-[#00F0FF]/5 shadow-[0_0_30px_rgba(0,240,255,0.1)]">
+                            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#00F0FF] to-transparent" />
+                            <h1 className="text-2xl font-black italic tracking-tighter text-[#00F0FF]" {...props} />
+                          </div>
+                        );
+                      }
+                      return <h1 className="text-xl font-bold mt-6 mb-3 text-[#00F0FF]" {...props} />
+                    },
+                    h2: ({node, ...props}) => <h2 className="text-lg font-bold mt-5 mb-2 text-[#E0E0E0] border-b border-white/5 pb-1" {...props} />,
                     h3: ({node, ...props}) => <h3 className="text-md font-semibold mt-4 mb-2 text-[#E0E0E0]" {...props} />,
                     
                     // Standard blocks
-                    p: ({node, ...props}) => <p className="mb-3 last:mb-0" {...props} />,
+                    p: ({node, ...props}) => {
+                      const text = String(props.children);
+                      if (text.toLowerCase().startsWith('note:')) {
+                        return (
+                          <div className="relative my-4 p-4 rounded-[12px] overflow-hidden border border-[#B026FF]/30 bg-[#B026FF]/5 shadow-[0_0_20px_rgba(176,38,255,0.1)]">
+                            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#B026FF] to-transparent" />
+                            <p className="mb-0 text-[#E0E0E0]" {...props} />
+                          </div>
+                        );
+                      }
+                      return <p className="mb-4 last:mb-0" {...props} />;
+                    },
                     a: ({node, ...props}) => <a className="text-[#4A9BD9] hover:text-[#00F0FF] underline decoration-[#00F0FF]/30 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />,
                   }}
                 >
