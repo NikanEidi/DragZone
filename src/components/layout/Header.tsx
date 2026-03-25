@@ -28,9 +28,23 @@ export const Header = React.memo(function Header({ status }: Props) {
 
       {/* Brand */}
       <div className="flex flex-col min-w-0">
-        <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 15, fontWeight: 600, color: "var(--text-primary, #E6EDF3)", letterSpacing: "2px" }}>
-          DRAFZONE
-        </span>
+        <div className="flex items-center gap-2">
+          <span style={{ 
+            fontFamily: "var(--font-mono, monospace)", 
+            fontSize: 15, 
+            fontWeight: 700, 
+            color: "var(--cyan, #00F0FF)", 
+            letterSpacing: "2.5px",
+            textShadow: "0 0 12px rgba(0,240,255,0.4)",
+            animation: "pulseGlow 3s ease-in-out infinite"
+          }}>
+            DRAFZONE
+          </span>
+          <div className="hidden xs:flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[rgba(0,240,255,0.05)] border border-[rgba(0,240,255,0.1)]">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-pulse" />
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 600, color: "#00F0FF", letterSpacing: "1px" }}>ONLINE</span>
+          </div>
+        </div>
         <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 10, color: "var(--text-muted, #484F58)", letterSpacing: "0.5px" }}>
           LOCAL AI ENGINE
         </span>
@@ -56,9 +70,13 @@ export const Header = React.memo(function Header({ status }: Props) {
         <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 9, color: "var(--text-secondary, #8B949E)" }}>{statusText}</span>
       </div>
 
-      {/* Dragon Head — Top Right Decor (Large) */}
-      <div className="absolute top-0 right-0 p-3 opacity-[0.4] pointer-events-none overflow-hidden select-none">
-        <img src={dragonHead} alt="" style={{ width: 64, height: 64, filter: "drop-shadow(0 0 20px rgba(0,212,229,0.1))" }} />
+      {/* Dragon Head — The "Branding Signature" (Extreme Top Right) */}
+      <div className="absolute top-[-10px] right-[-10px] opacity-[0.4] pointer-events-none select-none z-[100] transform rotate-[-5deg]">
+        <img src={dragonHead} alt="" style={{ 
+          width: "clamp(120px, 15vw, 180px)", 
+          height: "auto", 
+          filter: "drop-shadow(-10px 10px 30px rgba(0,212,229,0.15)) drop-shadow(0 0 50px rgba(157,92,255,0.1))" 
+        }} />
       </div>
     </header>
   );
