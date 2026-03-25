@@ -1,12 +1,12 @@
 <div align="center">
 
-# 🐉 DRAGZONE — Cyber Dragon Edition
+# 🐉 DRAGZONE — THE ULTIMATE CYBER DRAGON EDITION
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-00D4E5.svg?style=for-the-badge&logo=github)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.3.0-B026FF.svg?style=for-the-badge&logo=npm)](https://github.com/NikanEidi/DragZone/releases)
+[![Version](https://img.shields.io/badge/Version-1.3.1-B026FF.svg?style=for-the-badge&logo=npm)](https://github.com/NikanEidi/DragZone/releases)
 [![Build Status](https://img.shields.io/badge/Build-STABLE-F85149.svg?style=for-the-badge&logo=vercel)](https://github.com/NikanEidi/DragZone)
 
-**DRAGZONE** is a premium, high-immersion AI ecosystem designed for advanced document parsing, technical research, and neural-linked workflow automation. Built with a specialized "Cyber Dragon" aesthetic, it seamlessly blends military-grade UI design with a buttery-smooth 60FPS interaction layer.
+**DRAGZONE** is a high-performance, neural-linked AI workspace. Forged in the fires of specialized cyberpunk design, it transcends the boundaries of standard AI interfaces to provide a truly immersive, local-first engine for developers, researchers, and technical architects.
 
 <img src="./public/og-image.png" alt="DragZone UI Preview" width="100%" />
 
@@ -14,76 +14,133 @@
 
 ---
 
-## 🎨 The Cyber Dragon Experience
+## 🐲 THE VISUAL ENGINE (60FPS IMMERSION)
 
-DragZone isn't just another chat interface; it is an immersive, local-first terminal designed for the future of human-AI collaboration.
+DragZone is engineered for zero-latency visual feedback using hardware-accelerated rendering techniques.
 
-- **Neural Background System**: Multi-layered parallax backgrounds with hex-grid overlays and our custom "Cyber-Aurora" atmosphere.
-- **Dragon Guardian Mascot**: A titanic, high-fidelity static SVG signature sitting in the core header, keeping watch over your active sessions.
-- **Liquid Glass UI**: Ultra-blurred translucency (`30px` backdrop), premium border-glow, and custom tactile SVG dragon-skin textures.
-- **Performance Optimized**: Uses hardware-accelerated transforms (`translate3d(0,0,0)`) to maintain perfect 60FPS physics on both M-series MacBooks and iPad Minis.
+| Component | Technology | Fidelity | Performance |
+| :--- | :--- | :--- | :--- |
+| **Mascot Signature** | High-Density SVG | Ultra-Premium | GPU Compressed |
+| **Backdrop Atmosphere** | Layered Parallax | 8-Layer Depth | 60 FPS Native |
+| **Liquid Glass** | `blur(30px)` + `mask` | Precision Optic | Hardware Scaled |
+| **Particle Field** | HTML5 Canvas API | Dynamic High-Res | Zero-Interference |
 
----
-
-## 🚀 Core Systems
-
-### 🤖 Local Neural Processing (Ollama)
-- Direct integration with local LLM instances (default: `localhost:11434`).
-- **Privacy First**: No data ever leaves your hardware. All reasoning happens locally behind the "Encrypted Link."
-- **Real-Time Streaming**: Incremental token generation with optimized React state batching to prevent re-render lag.
-
-### 📦 Omni-Parser Engine
-DragZone is shipped with a built-in Omni-Parser drop zone allowing you to effortlessly inject massive contexts into your AI's reasoning capabilities:
-- **Formats**: PDFs, Excel data (`.xlsx`), Word documents (`.docx`), PowerPoints (`.pptx`), CSVs, and standard HTML files.
-- **Vision Models**: Advanced diagram and chart reading (if paired with models like `llava`).
-
-### 🛠️ Interactive Tooling & CodeFrames
-- **Smart CodeFrames**: DragZone automatically detects code logic and injects it into premium CodeFrames featuring one-click copy and non-blocking file downloads (bypassing the Javascript main thread).
-- **System Status Portal**: A functional real-time diagnostic overlay built directly into the header providing layout logic status and engine connection states.
+### 🎨 Visual Language System
+Our DESIGN-TO-CODE bridge ensures pixel-perfect reproduction of complex high-tech interfaces:
+- **Base Neural Layer**: Deep charcoal gradients with radial highlight pulses.
+- **Accent Matrices**:
+  - `var(--cyan)`: #00F0FF (Primary Action/System Ready)
+  - `var(--neon-purple)`: #B026FF (Neural Link/Processing)
+  - `var(--red)`: #FF2E2E (Security Breach/Error)
+- **Typography**: 
+  - *Headlines*: 'Share Tech Mono' (Fixed-width clarity)
+  - *Body*: 'Inter' (Extreme legibility)
+  - *Systems*: 'JetBrains Mono' (Code-centric)
 
 ---
 
-## 📱 Mobile & PWA Optimization
+## 🚀 FUNCTIONAL CORE & NEURAL PROTOCOLS
 
-Built with fluid typography, flex-clamps, and viewport scaling, DragZone looks and performs impeccably across all devices:
+### 🤖 Local Artificial Intelligence (LLM)
+Powered by high-performance local inference via **Ollama**, ensuring 100% data residency and privacy. No data ever leaves your encrypted machine core.
 
-- **Desktop/MacBook**: High-density horizontal layouts with dynamic sub-menus.
-- **Tablets/iPads**: Seamless touch-interfaces with swipe-to-collapse sidebars.
-- **PWA Ready**: Tap **'Share' > 'Add to Home Screen'** on your iPhone or iPad. DragZone includes a custom `manifest.webmanifest` to lock the UI into a true, borderless fullscreen application experience.
-
----
-
-## 🏗️ Deployment & Launch
-
-1.  **Clone the Dragon Repository**:
-    ```bash
-    git clone https://github.com/NikanEidi/DragZone.git
-    cd DragZone
-    ```
-2.  **Initialize Nueral Links**:
-    ```bash
-    npm install
-    ```
-3.  **Launch the System**:
-    ```bash
-    chmod +x start_dragon.sh
-    ./start_dragon.sh
-    ```
-4.  **Access the Engine**:
-    - MacBook / Local: `http://localhost:3000`
-    - iPad / Network: `http://[YOUR_IP]:3000`
+### 📦 Omni-Parser & Context Buffer
+DragZone supports a massive range of technical data injection points:
+- **Tabular Intelligence**: Native parsing for `.csv`, `.xlsx`, and JSON datasets.
+- **Technical Documentation**: Multi-layered PDF and DOCX extraction protocols.
+- **Vision Integration**: Real-time image-to-text analysis for engineering diagrams and screenshots.
 
 ---
 
-## 📜 Architectural Documentation
+## 🏗️ ADVANCED ARCHITECTURAL FLOWS
 
-DragZone's logic is strictly mapped. Learn how to extend the Dragon by reviewing our core engineering documentation:
+### 🌊 Neural Link Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant U as Neural Link (User)
+    participant C as DragZone Interface
+    participant B as DragEngine Gateway
+    participant O as Ollama Core
+    
+    U->>C: Drop Technical Payload (.pdf)
+    C->>B: POST /api/upload (Multipart Blob)
+    B-->>B: Execute Omni-Parser Logic
+    B-->>C: Payload Decoded & Cached
+    U->>C: Input Prompt ("Summarize results")
+    C->>B: Execute Inference (POST /api/chat)
+    B->>O: Connect Local Daemon (Port 11434)
+    O-->>B: Stream Token Matrix
+    B-->>C: Real-time UI Dispatch (SSE)
+    C-->>U: Render Syntax-Highlighted Data
+```
 
-- [🏗️ ARCHITECTURE.md](./ARCHITECTURE.md): Deep dive into our modular React MVC pattern and GPU-offloading rendering strategy.
-- [📝 CHANGELOG.md](./CHANGELOG.md): History of the Dragon's evolution up to v1.3.0.
-- [🧪 TESTING.md](./TESTING.md): Guide to the Cypress (E2E) and Jest test suites.
-- [📂 FOLDER_EXPLAINER.md](./FOLDER_EXPLAINER.md): Detailed directory-level structural breakdown.
-- [⚙️ FUNCTION_EXPLAINER.md](./FUNCTION_EXPLAINER.md): The internal logic mapping of our React custom hooks.
+### 🧠 State Orchestration Logic
+```mermaid
+graph TD
+    A[Global Controller: App.tsx] --> B[Layout: Sidebar.tsx]
+    A --> C[Context Area: ChatArea.tsx]
+    A --> D[Visuals: DragonGuardian.tsx]
+    
+    subgraph "Neural Threads"
+    C --> E[Message Processing]
+    E --> F[Code Segment Detection]
+    F --> G[CodeFrame Injection]
+    end
+    
+    subgraph "Hardware VFX"
+    D --> H[Mouse Delta Calculation]
+    H --> I[Parallax Matrix Rotation]
+    I --> J[SVG Layer Transformation]
+    end
+```
+
+---
+
+## 🛠️ DEVELOPER SDK & COMMANDS
+
+### 🖥️ Local Management
+| Command | Mode | Target |
+| :--- | :--- | :--- |
+| `npm run dev` | Development | Localhost:3000 |
+| `npm run build` | Production | Optimized /dist |
+| `./start_dragon.sh` | Full Sync | Front + Back (Unified) |
+| `npm run test:unit`| Diagnostic | Jest Test Suite |
+
+### 📄 Document Metadata API
+Integrated with **FastAPI**, the DragEngine supports deep-packet inspection for document context:
+```python
+@app.post("/api/upload")
+async def handle_context(files: List[UploadFile] = File(...)):
+    # Standardize metadata across formats
+    for file in files:
+        # Dynamic Dispatch based on Mime-Type
+        context = await OmniParser.extract(file)
+        ActiveSession.inject(context)
+    return {"status": "NEURAL_LINK_ESTABLISHED"}
+```
+
+---
+
+## 📱 PWA & MOBILE ARCHITECTURE
+DragZone is built as a Progressive Web App, utilizing service workers and manifest logic to behave like a native iOS/macOS application.
+
+**How to Install:**
+1. Open **DragZone** in Safari or Chrome.
+2. Tap the **Share** button.
+3. Select **'Add to Home Screen'**.
+4. The **Cyber Dragon** icon will appear on your dashboard, providing a standalone, borderless experience.
+
+---
+
+## 📜 PROJECT REPOSITORY & ARCHIVES
+
+Experience the full evolution of the Dragon engine through our detailed technical logs:
+
+- [🏗️ ARCHITECTURE.md](./ARCHITECTURE.md) - Deep dive into the Rendering & State Architecture.
+- [📝 CHANGELOG.md](./CHANGELOG.md) - Iterative history of performance surgery and branding.
+- [🧪 TESTING.md](./TESTING.md) - Automated stability protocols (Cypress/Jest).
+- [📂 FOLDER_EXPLAINER.md](./FOLDER_EXPLAINER.md) - Source code directory mapping.
+- [⚙️ FUNCTION_EXPLAINER.md](./FUNCTION_EXPLAINER.md) - React Hook logic & API interaction manual.
 
 ---
 
@@ -92,216 +149,7 @@ DragZone's logic is strictly mapped. Learn how to extend the Dragon by reviewing
 <p><em>"The Dragon is always watching."</em> 🐉✨</p>
 </div>
 
-
 ---
-
-
----
-
-## 📊 SYSTEM TELEMETRY & ARCHITECTURAL GRAPHS
-
-### 1. 🐉 Neural Engine State Machine (Mermaid)
-```mermaid
-stateDiagram-v2
-    [*] --> Idle: Initialize Sequence
-    Idle --> ParsingProtocol: Omni-Drop Payload Detected
-    ParsingProtocol --> Extracting: Reading Blob Streams
-    Extracting --> Formatting: OCR / Text / Buffer Conversion
-    
-    state Formatting {
-        direction LR
-        PDF --> Text
-        XLSX --> PandasDataframe
-        Images --> LLaVAVisionVector
-    }
-    
-    Formatting --> Ready: Encrypted Data Injected
-    Ready --> Inference: User Query Received
-    
-    state Inference {
-        direction TB
-        Llama3.1 --> TokenStream: generating
-        TokenStream --> Websocket: streaming
-        Websocket --> ReactUI: dispatching state
-    }
-    
-    Inference --> Idle: Stream Closed / Output Complete
-```
-
-### 2. ⚛️ React Component Inter-Dependency Chart
-```mermaid
-classDiagram
-    class App {
-      +layoutMode: 'full' | 'split'
-      +sidebarCollapsed: boolean
-      +handleSystemInfo()
-    }
-    class Sidebar {
-      +conversations: Array
-      +setActive()
-      +delete()
-    }
-    class ChatArea {
-      +messages: Array
-      +isGenerating: boolean
-      +handleDrop()
-    }
-    class MessageBubble {
-      +isUser: boolean
-      +renderMarkdown()
-    }
-    class CodeFrame {
-      +language: string
-      +copyToClipboard()
-      +downloadSnippet()
-    }
-    class DragonGuardian {
-      +parallaxOffset: float
-      +render3D()
-    }
-    
-    App --> Sidebar : Controls State
-    App --> ChatArea : Passes Messages
-    App --> DragonGuardian : Global VFX
-    ChatArea --> MessageBubble : Renders
-    MessageBubble --> CodeFrame : Interprets
-```
-
-### 3. 🌐 API Gateway Network Topology
-```mermaid
-graph TD
-    UI[DragZone React App] ==>|WebSocket/HTTP| APIGW[FastAPI Gateway]
-    
-    subgraph "Core Server [Local Environment]"
-    APIGW -->|Memory Management| RAM[(Session State Buffer)]
-    APIGW -->|Python Core| Parser[Omni-Parser Scripts]
-    Parser --> Pandas[Pandas & PyPDF]
-    Parser --> CV[OpenCV/LLaVA Image Buffer]
-    end
-
-    APIGW ==>|Internal Port 11434| Ollama[Ollama Daemon]
-    
-    subgraph "Local AI Engine"
-    Ollama --> LLM[Llama 3.1 8B Instruct]
-    Ollama --> Vision[LLaVA Core]
-    Ollama --> Embedding[Nomic Embed Text v1.5]
-    end
-    
-    LLM ==> APIGW
-    APIGW ==> UI
-```
-
-### 4. 🗄️ Database Architecture (Entity Relationship)
-```mermaid
-erDiagram
-    CONVERSATION ||--o{ MESSAGE : contains
-    CONVERSATION {
-        string id PK
-        string title
-        datetime updated_at
-        int token_count
-    }
-    MESSAGE ||--o{ ATTACHMENT : includes
-    MESSAGE {
-        string id PK
-        string conversation_id FK
-        string role "user | assistant | system"
-        text content
-        datetime created_at
-    }
-    ATTACHMENT {
-        string id PK
-        string message_id FK
-        string type "pdf | csv | image"
-        binary raw_data
-        text parsed_context
-    }
-```
-
-### 5. ⏱️ Data Intake Sequence flow
-```mermaid
-sequenceDiagram
-    actor User
-    participant DZ as DragZone Client
-    participant API as FastAPI Backend
-    participant Parser as Omni-Parser Module
-    participant LLM as Ollama Link
-    
-    User->>DZ: Drag & Drops 50MB PDF File
-    DZ->>DZ: Validate Filetype & Limit
-    DZ->>API: POST /api/upload (FormData)
-    API->>Parser: Stream file to chunked buffer
-    Parser-->>Parser: Optical Character Recognition
-    Parser-->>API: Return clean unified Text Block
-    API-->>DZ: Upload Successful (Context Ready)
-    User->>DZ: Send Message ("Summarize data")
-    DZ->>LLM: Stream (Context + Message)
-    LLM-->>DZ: Real-time Markdown token stream
-    DZ-->>User: Displays syntax-highlighted summary
-```
-
----
-
-## 💻 ALGORITHMIC PSEUDOCODE: DRAGON HEURISTICS
-
-### The "Liquid Glass" Parallax Calculus
-```pseudocode
-function computeSubpixelDragonOffset(mouseX, mouseY, screenWidth, screenHeight):
-    // Standardize input bounds
-    normX = (mouseX / screenWidth) - 0.5
-    normY = (mouseY / screenHeight) - 0.5
-    
-    // Apply heavy-mass damping filter to simulate massive dragon head weight
-    damping_factor = 0.08
-    targetRotationX = normY * -12.0 degrees  // Inverted Y-axis for organic feel
-    targetRotationY = normX * 18.0 degrees   // Wider sweep on horizontal
-    
-    // Use Lerp (Linear Interpolation) on RAF (Request Animation Frame)
-    currentRotX = lerp(currentRotX, targetRotationX, damping_factor)
-    currentRotY = lerp(currentRotY, targetRotationY, damping_factor)
-    
-    // Inject glow-matrix color shift based on velocity
-    velocity = abs(currentRotX - previousRotX) + abs(currentRotY - previousRotY)
-    glowIntensity = clamp(0.2, 1.0, baseGlow + (velocity * 1.5))
-    
-    execute css `transform: perspective(1000px) rotateX(${currentRotX}) rotateY(${currentRotY})`
-    execute css `filter: drop-shadow(0 0 ${glowIntensity}px var(--cyan))`
-```
-
-### Stream Pipeline Interrupt Handling
-```pseudocode
-function ingestOllamaLLMStream(contextPayload):
-    let abortController = new AbortController()
-    
-    // Initialize secure socket
-    connection = await fetch('localhost:11434/api/chat', {
-        method: "POST",
-        body: json(contextPayload),
-        signal: abortController.signal
-    })
-    
-    reader = connection.body.getReader()
-    decoder = new TextDecoder("utf-8")
-    
-    while True:
-        chunk, isDone = await reader.read()
-        if isDone: break
-        
-        // Decode chunk matrix
-        matrixText = decoder.decode(chunk, stream: true)
-        lines = matrixText.split('\n')
-        
-        for line in lines:
-            if line.isEmpty(): continue
-            
-            payload = JSON.parse(line)
-            if payload.error: throw NeuralLinkException(payload.error)
-            
-            // Dispatch specifically to Redux/React State without full unmount
-            State.buffer += payload.message.content
-            UI.triggerTickRender()
-```
-
 
 <details>
 <summary><h2>🔥 DRAGZONE CORE: COMPLETE CODEBASE REPOSITORY</h2></summary>
@@ -399,7 +247,7 @@ The following section contains the literal raw source code of the entire DragZon
 │   └── e2e
 │       └── smoke.cy.ts
 ├── cypress.config.ts
-├── generate_mega_readme.py
+├── generate_master_readme.py
 ├── index.html
 ├── jest.config.cjs
 ├── jest.setup.ts
@@ -868,6 +716,257 @@ Key files in the DragZone project and their responsibilities.
 
 ```
 
+### File: `generate_master_readme.py`
+```python
+import os
+
+def generate_ultimate_readme():
+    header = """<div align="center">
+
+# 🐉 DRAGZONE — THE ULTIMATE CYBER DRAGON EDITION
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-00D4E5.svg?style=for-the-badge&logo=github)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/Version-1.3.1-B026FF.svg?style=for-the-badge&logo=npm)](https://github.com/NikanEidi/DragZone/releases)
+[![Build Status](https://img.shields.io/badge/Build-STABLE-F85149.svg?style=for-the-badge&logo=vercel)](https://github.com/NikanEidi/DragZone)
+
+**DRAGZONE** is a high-performance, neural-linked AI workspace. Forged in the fires of specialized cyberpunk design, it transcends the boundaries of standard AI interfaces to provide a truly immersive, local-first engine for developers, researchers, and technical architects.
+
+<img src="./public/og-image.png" alt="DragZone UI Preview" width="100%" />
+
+</div>
+
+---
+
+## 🐲 THE VISUAL ENGINE (60FPS IMMERSION)
+
+DragZone is engineered for zero-latency visual feedback using hardware-accelerated rendering techniques.
+
+| Component | Technology | Fidelity | Performance |
+| :--- | :--- | :--- | :--- |
+| **Mascot Signature** | High-Density SVG | Ultra-Premium | GPU Compressed |
+| **Backdrop Atmosphere** | Layered Parallax | 8-Layer Depth | 60 FPS Native |
+| **Liquid Glass** | `blur(30px)` + `mask` | Precision Optic | Hardware Scaled |
+| **Particle Field** | HTML5 Canvas API | Dynamic High-Res | Zero-Interference |
+
+### 🎨 Visual Language System
+Our DESIGN-TO-CODE bridge ensures pixel-perfect reproduction of complex high-tech interfaces:
+- **Base Neural Layer**: Deep charcoal gradients with radial highlight pulses.
+- **Accent Matrices**:
+  - `var(--cyan)`: #00F0FF (Primary Action/System Ready)
+  - `var(--neon-purple)`: #B026FF (Neural Link/Processing)
+  - `var(--red)`: #FF2E2E (Security Breach/Error)
+- **Typography**: 
+  - *Headlines*: 'Share Tech Mono' (Fixed-width clarity)
+  - *Body*: 'Inter' (Extreme legibility)
+  - *Systems*: 'JetBrains Mono' (Code-centric)
+
+---
+
+## 🚀 FUNCTIONAL CORE & NEURAL PROTOCOLS
+
+### 🤖 Local Artificial Intelligence (LLM)
+Powered by high-performance local inference via **Ollama**, ensuring 100% data residency and privacy. No data ever leaves your encrypted machine core.
+
+### 📦 Omni-Parser & Context Buffer
+DragZone supports a massive range of technical data injection points:
+- **Tabular Intelligence**: Native parsing for `.csv`, `.xlsx`, and JSON datasets.
+- **Technical Documentation**: Multi-layered PDF and DOCX extraction protocols.
+- **Vision Integration**: Real-time image-to-text analysis for engineering diagrams and screenshots.
+
+---
+
+## 🏗️ ADVANCED ARCHITECTURAL FLOWS
+
+### 🌊 Neural Link Sequence Diagram
+```mermaid
+sequenceDiagram
+    participant U as Neural Link (User)
+    participant C as DragZone Interface
+    participant B as DragEngine Gateway
+    participant O as Ollama Core
+    
+    U->>C: Drop Technical Payload (.pdf)
+    C->>B: POST /api/upload (Multipart Blob)
+    B-->>B: Execute Omni-Parser Logic
+    B-->>C: Payload Decoded & Cached
+    U->>C: Input Prompt ("Summarize results")
+    C->>B: Execute Inference (POST /api/chat)
+    B->>O: Connect Local Daemon (Port 11434)
+    O-->>B: Stream Token Matrix
+    B-->>C: Real-time UI Dispatch (SSE)
+    C-->>U: Render Syntax-Highlighted Data
+```
+
+### 🧠 State Orchestration Logic
+```mermaid
+graph TD
+    A[Global Controller: App.tsx] --> B[Layout: Sidebar.tsx]
+    A --> C[Context Area: ChatArea.tsx]
+    A --> D[Visuals: DragonGuardian.tsx]
+    
+    subgraph "Neural Threads"
+    C --> E[Message Processing]
+    E --> F[Code Segment Detection]
+    F --> G[CodeFrame Injection]
+    end
+    
+    subgraph "Hardware VFX"
+    D --> H[Mouse Delta Calculation]
+    H --> I[Parallax Matrix Rotation]
+    I --> J[SVG Layer Transformation]
+    end
+```
+
+---
+
+## 🛠️ DEVELOPER SDK & COMMANDS
+
+### 🖥️ Local Management
+| Command | Mode | Target |
+| :--- | :--- | :--- |
+| `npm run dev` | Development | Localhost:3000 |
+| `npm run build` | Production | Optimized /dist |
+| `./start_dragon.sh` | Full Sync | Front + Back (Unified) |
+| `npm run test:unit`| Diagnostic | Jest Test Suite |
+
+### 📄 Document Metadata API
+Integrated with **FastAPI**, the DragEngine supports deep-packet inspection for document context:
+```python
+@app.post("/api/upload")
+async def handle_context(files: List[UploadFile] = File(...)):
+    # Standardize metadata across formats
+    for file in files:
+        # Dynamic Dispatch based on Mime-Type
+        context = await OmniParser.extract(file)
+        ActiveSession.inject(context)
+    return {"status": "NEURAL_LINK_ESTABLISHED"}
+```
+
+---
+
+## 📱 PWA & MOBILE ARCHITECTURE
+DragZone is built as a Progressive Web App, utilizing service workers and manifest logic to behave like a native iOS/macOS application.
+
+**How to Install:**
+1. Open **DragZone** in Safari or Chrome.
+2. Tap the **Share** button.
+3. Select **'Add to Home Screen'**.
+4. The **Cyber Dragon** icon will appear on your dashboard, providing a standalone, borderless experience.
+
+---
+
+## 📜 PROJECT REPOSITORY & ARCHIVES
+
+Experience the full evolution of the Dragon engine through our detailed technical logs:
+
+- [🏗️ ARCHITECTURE.md](./ARCHITECTURE.md) - Deep dive into the Rendering & State Architecture.
+- [📝 CHANGELOG.md](./CHANGELOG.md) - Iterative history of performance surgery and branding.
+- [🧪 TESTING.md](./TESTING.md) - Automated stability protocols (Cypress/Jest).
+- [📂 FOLDER_EXPLAINER.md](./FOLDER_EXPLAINER.md) - Source code directory mapping.
+- [⚙️ FUNCTION_EXPLAINER.md](./FUNCTION_EXPLAINER.md) - React Hook logic & API interaction manual.
+
+---
+
+<div align="center">
+<p><em>Designed, Engineered, and Forged by <strong>Nikan Eidi</strong>.</em></p>
+<p><em>"The Dragon is always watching."</em> 🐉✨</p>
+</div>
+
+---
+"""
+
+    code_dump_header = """
+<details>
+<summary><h2>🔥 DRAGZONE CORE: COMPLETE CODEBASE REPOSITORY</h2></summary>
+
+<blockquote>
+The following section contains the literal raw source code of the entire DragZone structure, allowing an advanced AI agent to reconstruct it instantly.
+</blockquote>
+
+## 📁 PROJECT STRUCTURE
+
+```text
+"""
+    
+    try:
+        # Generate the tree structure
+        tree_out = os.popen("tree -I 'node_modules|.git|dist|public|assets|__pycache__' -a").read()
+        
+        # Build the code dump
+        code_dump = []
+        skipped_files = []
+        
+        for root, dirs, files in os.walk("."):
+            # Exclude directories
+            if any(ignored in root for ignored in ["node_modules", ".git", "dist", "public", ".gemini", "__pycache__"]):
+                continue
+            for file in files:
+                # Relevant file extensions
+                if file.endswith((".ts", ".tsx", ".py", ".css", ".json", ".sh", ".html", ".md", ".cjs", ".mjs")) or file == "Modelfile":
+                    # Exclude the script itself and self-referencing large files
+                    if file in ["package-lock.json", "generate_mega_readme.py", "README.md", "MASTER_AGENT_PROMPT.md"]:
+                        continue
+                    if "log" in file.lower():
+                        continue
+                    
+                    path = os.path.join(root, file)
+                    
+                    # Language mapping for markdown
+                    ext = file.split('.')[-1]
+                    lang_map = {
+                        'py': 'python', 
+                        'ts': 'typescript', 
+                        'tsx': 'tsx', 
+                        'css': 'css', 
+                        'json': 'json', 
+                        'sh': 'bash', 
+                        'html': 'html',
+                        'md': 'markdown',
+                        'cjs': 'javascript',
+                        'mjs': 'javascript'
+                    }
+                    lang = lang_map.get(ext, 'text')
+                    
+                    try:
+                        with open(path, 'r', encoding='utf-8') as f:
+                            content = f.read()
+                            
+                        # Chunking/Size management
+                        if len(content) > 150000:
+                            skipped_files.append(path)
+                            continue
+                            
+                        clean_path = path[2:] if path.startswith('./') else path
+                        code_dump.append(f"### File: `{clean_path}`\n")
+                        code_dump.append(f"```{lang}\n{content}\n```\n\n")
+                    except Exception as e:
+                        pass
+        
+        # Combine everything
+        full_readme = header + code_dump_header + tree_out + "```\n\n---\n\n## 📝 COMPLETE SOURCE CODE\n\n"
+        full_readme += "".join(code_dump)
+        
+        if skipped_files:
+            full_readme += "### ⚠️ Skipped Massive Files:\n"
+            for sf in skipped_files:
+                full_readme += f"- `{sf}`\n"
+        
+        full_readme += "\n</details>\n"
+        
+        # Write the final file
+        with open("README.md", "w", encoding="utf-8") as out:
+            out.write(full_readme)
+            
+        print("Ultimate README.md generated successfully.")
+        
+    except Exception as e:
+        print(f"Error during README generation: {e}")
+
+if __name__ == "__main__":
+    generate_ultimate_readme()
+
+```
+
 ### File: `jest.config.cjs`
 ```javascript
 module.exports = {
@@ -1112,84 +1211,6 @@ Main end-to-end (E2E) testing suite for platform stability.
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
-
-```
-
-### File: `generate_mega_readme.py`
-```python
-import os
-
-def append_mega_dump():
-    output_file = "README.md"
-    try:
-        with open(output_file, 'a', encoding='utf-8') as out:
-            out.write("\n\n---\n\n")
-            out.write("<details>\n<summary><h2>🔥 DRAGZONE CORE: COMPLETE CODEBASE REPOSITORY</h2></summary>\n\n")
-            out.write("<blockquote>\n")
-            out.write("The following section contains the literal raw source code of the entire DragZone structure, allowing an advanced AI agent to reconstruct it instantly.\n")
-            out.write("</blockquote>\n\n")
-
-            out.write("## 📁 PROJECT STRUCTURE\n\n")
-            out.write("```text\n")
-            out.write(os.popen("tree -I 'node_modules|.git|dist|public|assets|__pycache__' -a").read())
-            out.write("```\n\n")
-
-            out.write("---\n\n")
-            out.write("## 📝 COMPLETE SOURCE CODE\n\n")
-
-            skipped_files = []
-
-            for root, dirs, files in os.walk("."):
-                if any(ignored in root for ignored in ["node_modules", ".git", "dist", "public", ".gemini", "__pycache__"]):
-                    continue
-                for file in files:
-                    if file.endswith((".ts", ".tsx", ".py", ".css", ".json", ".sh", ".html", ".md", ".cjs", ".mjs")) or file == "Modelfile":
-                        if file == "package-lock.json" or "log" in file.lower() or file == "generate_prompt.py" or file == "README.md":
-                            continue
-                        path = os.path.join(root, file)
-
-                        ext = file.split('.')[-1]
-                        lang_map = {
-                            'py': 'python', 
-                            'ts': 'typescript', 
-                            'tsx': 'tsx', 
-                            'css': 'css', 
-                            'json': 'json', 
-                            'sh': 'bash', 
-                            'html': 'html',
-                            'md': 'markdown',
-                            'cjs': 'javascript',
-                            'mjs': 'javascript'
-                        }
-                        lang = lang_map.get(ext, 'text')
-
-                        try:
-                            with open(path, 'r', encoding='utf-8') as f:
-                                content = f.read()
-
-                            if len(content) > 150000:
-                                skipped_files.append(path)
-                                continue
-
-                            clean_path = path[2:] if path.startswith('./') else path
-                            out.write(f"### File: `{clean_path}`\n")
-                            out.write(f"```{lang}\n{content}\n```\n\n")
-                        except Exception as e:
-                            pass
-
-            if skipped_files:
-                out.write("### ⚠️ Skipped Massive Files:\n")
-                for sf in skipped_files:
-                    out.write(f"- `{sf}`\n")
-
-            out.write("\n</details>\n")
-            print("Mega dump appended to README.md successfully.")
-            
-    except Exception as e:
-        print(f"Failed to write dump: {e}")
-
-if __name__ == "__main__":
-    append_mega_dump()
 
 ```
 
