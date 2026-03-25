@@ -29,6 +29,10 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
     inputRef.current?.focus();
   }, [input, attachments, onSend]);
 
+  const removeAttachment = useCallback((id: string) => {
+    setAttachments(prev => prev.filter(a => a.id !== id));
+  }, []);
+
   const handleFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files?.length) return;
@@ -48,6 +52,18 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
       inputRef.current.style.height = `${Math.min(150, inputRef.current.scrollHeight)}px`;
     }
   }, [input]);
+
+  // Close menu on click outside
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleOutside = (e: MouseEvent) => {
+      if (menuOpen && !(e.target as HTMLElement).closest('.attach-menu-container')) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('mousedown', handleOutside);
+    return () => window.removeEventListener('mousedown', handleOutside);
+  }, [menuOpen]);
 
   return (
     <div className="relative shrink-0 px-4 pb-4 pt-2 w-full">
@@ -71,12 +87,18 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
 
         {/* Attachments */}
         {attachments.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 p-2" style={{ borderBottom: "1px solid var(--border)" }}>
+          <div className="flex flex-wrap gap-1.5 p-2 bg-[rgba(0,0,0,0.15)]" style={{ borderBottom: "1px solid var(--border)" }}>
             {attachments.map(att => (
-              <div key={att.id} className="flex items-center gap-1.5 px-2 py-1 rounded text-xs"
+              <div key={att.id} className="flex items-center gap-1.5 px-2 py-1 rounded text-xs group/item"
                 style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", color: "var(--text-secondary)" }}>
                 {att.type.startsWith('image/') ? <ImageIcon size={11} /> : <Paperclip size={11} />}
-                <span style={{ fontSize: 11 }}>{att.name}</span>
+                <span className="max-w-[120px] truncate" style={{ fontSize: 11 }}>{att.name}</span>
+                <button 
+                  onClick={() => removeAttachment(att.id)}
+                  className="ml-0.5 p-0.5 rounded-full hover:bg-white/10 text-white/40 hover:text-red-400 transition-colors"
+                >
+                  <Plus size={10} style={{ transform: 'rotate(45deg)' }} />
+                </button>
               </div>
             ))}
           </div>
@@ -85,24 +107,24 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
         {/* Input row */}
         <div className="flex items-end gap-2 px-3 py-2.5">
           {/* Attach menu */}
-          <div className="relative shrink-0">
+          <div className="relative shrink-0 attach-menu-container">
             <button onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center justify-center rounded-md hover:bg-white/5 active:scale-95 min-w-[44px] min-h-[44px]"
               style={{ color: menuOpen ? "var(--cyan)" : "var(--text-muted)", transition: "color 100ms" }}>
               <Plus size={20} style={{ transform: menuOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 150ms" }} />
             </button>
             {menuOpen && (
-              <div className="absolute bottom-[calc(100%+8px)] left-0 p-1.5 rounded-lg min-w-[150px]"
-                style={{ background: "var(--bg-panel)", border: "1px solid var(--border)", animation: "fadeIn 100ms ease-out" }}>
-                <button onClick={() => fileRef.current?.click()} className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
+              <div className="absolute bottom-[calc(100%+8px)] left-0 p-1.5 rounded-lg min-w-[170px] z-[100]"
+                style={{ background: "var(--bg-panel)", border: "1px solid var(--border)", boxShadow: "0 -8px 24px rgba(0,0,0,0.5)", animation: "fadeIn 100ms ease-out" }}>
+                <button onClick={() => { fileRef.current!.accept = "*/*"; fileRef.current?.click(); }} className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
                   style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 500, transition: "background 100ms" }}>
-                  <Paperclip size={14} /> Upload File
+                  <Plus size={14} className="opacity-60" /> Upload File
                 </button>
-                <div className="h-px my-0.5 mx-2" style={{ background: "var(--border)" }} />
-                <button onClick={() => { if(fileRef.current) { fileRef.current.accept="image/*"; fileRef.current.click(); } }}
+                <div className="h-px my-1 mx-2" style={{ background: "var(--border)" }} />
+                <button onClick={() => { fileRef.current!.accept = "image/*"; fileRef.current?.click(); }}
                   className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
                   style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 500, transition: "background 100ms" }}>
-                  <ImageIcon size={14} /> Add Image
+                  <ImageIcon size={14} className="opacity-60" /> Add Image
                 </button>
               </div>
             )}
