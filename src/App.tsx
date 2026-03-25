@@ -61,8 +61,12 @@ export default function App() {
         :root {
           --font-ui: 'Inter', -apple-system, system-ui, sans-serif;
           --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-          --cyan: #00D4E5;
-          --purple: #9D5CFF;
+          --cyan: #00F0FF;
+          --purple: #B026FF;
+          --purple-glow: rgba(176, 38, 255, 0.4);
+          --cyan-glow: rgba(0, 240, 255, 0.4);
+          --bg-panel: #0a0c10;
+          --bg-surface: #0e1117;
           --bg-panel: rgba(14, 17, 23, 0.95);
           --bg-surface: rgba(22, 27, 34, 0.9);
           --border: rgba(255,255,255,0.06);
@@ -88,7 +92,8 @@ export default function App() {
 
         /* Only functional keyframes — no continuous loops */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes messageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes messageIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.8; text-shadow: 0 0 10px var(--cyan-glow); } 50% { opacity: 1; text-shadow: 0 0 20px var(--cyan-glow); } }
         @keyframes typingBounce { 0%,100% { transform: translateY(0) scale(0.7); opacity: 0.3; } 50% { transform: translateY(-4px) scale(1); opacity: 1; } }
 
         @supports (height: 100dvh) { .h-\\[100dvh\\] { height: 100dvh; } }

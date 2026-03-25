@@ -114,21 +114,26 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
               <Plus size={20} style={{ transform: menuOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 150ms" }} />
             </button>
             {menuOpen && (
-              <div className="absolute bottom-[calc(100%+12px)] left-0 p-1.5 rounded-lg min-w-[170px] z-[100]"
-                style={{ background: "var(--bg-panel, #0e1117)", border: "1px solid var(--border)", boxShadow: "0 8px 32px rgba(0,0,0,0.8)", animation: "fadeIn 100ms ease-out" }}>
+              <div className="absolute bottom-[calc(100%+12px)] left-0 p-1.5 rounded-lg min-w-[190px] z-[9999]"
+                style={{ 
+                  background: "#161b22", 
+                  border: "1px solid var(--purple, #B026FF)", 
+                  boxShadow: "0 10px 40px rgba(0,0,0,0.9), 0 0 25px rgba(176,38,255,0.3)",
+                  animation: "fadeIn 80ms ease-out" 
+                }}>
                 <button 
                   onClick={() => { if(fileRef.current) { fileRef.current.accept = "*/*"; fileRef.current.click(); } }} 
-                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-md w-full hover:bg-white/5 active:scale-[0.98] transition-colors"
-                  style={{ color: "var(--text-secondary)", fontSize: 13, fontWeight: 500 }}>
-                  <Plus size={16} className="text-[var(--cyan)]" /> 
+                  className="flex items-center gap-3 px-3 py-3 rounded-md w-full hover:bg-[rgba(176,38,255,0.15)] active:scale-[0.98] transition-all duration-75 text-left"
+                  style={{ color: "var(--text-primary, #E6EDF3)", fontSize: 13, fontWeight: 600 }}>
+                  <Plus size={20} style={{ color: "var(--purple, #B026FF)" }} /> 
                   <span>Upload File</span>
                 </button>
                 <div className="h-px my-1 mx-2 bg-white/5" />
                 <button 
                   onClick={() => { if(fileRef.current) { fileRef.current.accept = "image/*"; fileRef.current.click(); } }}
-                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-md w-full hover:bg-white/5 active:scale-[0.98] transition-colors"
-                  style={{ color: "var(--text-secondary)", fontSize: 13, fontWeight: 500 }}>
-                  <ImageIcon size={16} className="text-[var(--cyan)]" /> 
+                  className="flex items-center gap-3 px-3 py-3 rounded-md w-full hover:bg-[rgba(176,38,255,0.15)] active:scale-[0.98] transition-all duration-75 text-left"
+                  style={{ color: "var(--text-primary, #E6EDF3)", fontSize: 13, fontWeight: 600 }}>
+                  <ImageIcon size={20} style={{ color: "var(--purple, #B026FF)" }} /> 
                   <span>Add Image</span>
                 </button>
               </div>
