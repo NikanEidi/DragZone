@@ -2,9 +2,9 @@ import React from "react";
 import { Header } from "./components/layout/Header";
 import { Sidebar } from "./components/layout/Sidebar";
 import { ChatArea } from "./components/chat/ChatArea";
-import { DragonGuardian } from "./components/effects/DragonGuardian";
 import { ParticleField } from "./components/effects/ParticleField";
 import { CloudVape } from "./components/effects/CloudVape";
+import { useSwipeable } from 'react-swipeable';
 import { useChat } from "./hooks/useChat";
 import { HorizontalBorder, VerticalBorder, CornerOrnament } from "./components/icons/DragonBorderSVG";
 import dragonDrag from "./assets/dragon-drag.svg";
@@ -17,8 +17,15 @@ export default function App() {
     sendMessage, newConversation, deleteConversation, shareConversation, uploadFiles,
   } = useChat();
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => setSidebarOpen(false),
+    onSwipedRight: () => setSidebarOpen(true),
+    trackMouse: false, // Touch only
+    preventScrollOnSwipe: true,
+  });
+
   return (
-    <div className="h-[100dvh] w-screen overflow-hidden relative selection:bg-[#B026FF]/40 selection:text-[#FFFFFF]" style={{ background: "#030306" }}>
+    <div {...swipeHandlers} className="h-[100dvh] w-screen overflow-hidden relative selection:bg-[#B026FF]/40 selection:text-[#FFFFFF]" style={{ background: "#030306" }}>
 
       {/* ═══ MULTI-LAYER BACKGROUND SYSTEM ═══ */}
       
@@ -139,7 +146,6 @@ export default function App() {
             onShare={shareConversation}
             onToggleSidebar={() => setSidebarOpen(true)}
           />
-          <DragonGuardian />
         </div>
       </div>
 

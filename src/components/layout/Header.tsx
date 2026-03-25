@@ -3,6 +3,7 @@ import { Shield, Cpu, BarChart3, Wifi } from "lucide-react";
 import { PowerCore } from "../ui-custom/PowerCore";
 import { StatusPill } from "../ui-custom/StatusPill";
 import { CloudEngine } from "../ui-custom/CloudEngine";
+import { DragonGuardian } from "../effects/DragonGuardian";
 import type { ChatStatus } from "../../types/chat";
 
 interface Props {
@@ -22,23 +23,25 @@ export function Header({ status }: Props) {
 
       <PowerCore />
 
-      <div className="flex flex-col gap-0 min-w-0">
-        <h1 className="truncate" style={{
-          fontFamily: "'Orbitron',sans-serif",
-          fontSize: "clamp(14px, 2.2vw, 20px)",
-          letterSpacing: "clamp(4px, 0.6vw, 8px)",
-          color: "#F0F0F5",
-          textShadow: "0 0 20px rgba(0,240,255,0.3), 0 0 40px rgba(0,240,255,0.1)",
+      <div className="flex flex-col gap-0 min-w-0 relative z-10 w-[clamp(140px,30vw,300px)]">
+        <h1 className="truncate pointer-events-none" style={{
+          fontFamily: "'Share Tech Mono', monospace, 'JetBrains Mono', source-code-pro",
+          fontSize: "clamp(16px, 2.8vw, 24px)",
+          letterSpacing: "clamp(4px, 0.8vw, 10px)",
+          color: "#00F0FF",
+          fontWeight: 700,
+          textShadow: "0 0 10px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.15)",
+          animation: "pulseGlow 4s ease-in-out infinite"
         }}>
-          DRAGZONE
+          DRAFZONE
         </h1>
-        <div className="flex items-center gap-[clamp(4px,0.5vw,8px)]">
-          <span style={{ fontFamily: "'Exo 2',sans-serif", fontSize: "clamp(8px,0.9vw,10px)", letterSpacing: "2px", color: "#8A8A9A" }}>
-            PREMIUM ENGINE
-          </span>
-          <div className="hidden sm:flex items-center gap-1.5">
-            <div className="w-[3px] h-[3px] rounded-full" style={{ background: "#00F0FF", boxShadow: "0 0 4px #00F0FF" }} />
-            <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: "9px", color: "#5A5A6A" }}>
+        <div className="flex items-center gap-[clamp(6px,0.8vw,12px)] mt-0.5">
+          <div className="flex items-center gap-2 px-2 py-0.5 rounded-[4px] border border-[rgba(0,240,255,0.15)] bg-[rgba(0,240,255,0.05)] shadow-[inset_0_0_8px_rgba(0,240,255,0.1)]">
+            <div className="w-[4px] h-[4px] rounded-full animate-pulse" style={{ background: "#00F0FF", boxShadow: "0 0 6px #00F0FF" }} />
+            <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "10px", color: "#00F0FF", letterSpacing: "1px" }}>LOCAL ENGINE: ONLINE</span>
+          </div>
+          <div className="hidden sm:flex items-center gap-1.5 opacity-60">
+            <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: "10px", color: "#8A8A9A" }}>
               {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
             </span>
           </div>
@@ -51,10 +54,17 @@ export function Header({ status }: Props) {
       <CloudEngine status={status} />
 
       {/* Desktop pills */}
-      <div className="hidden lg:flex items-center gap-[clamp(4px,0.5vw,6px)]">
+      <div className="hidden lg:flex items-center gap-[clamp(4px,0.5vw,6px)] relative z-10 mr-[clamp(60px,10vw,120px)]">
         <StatusPill icon={Shield} label="SECURE" color="#00F0FF" />
         <StatusPill icon={Cpu} label="LUXURY" color="#B026FF" />
         <StatusPill icon={BarChart3} label="99.99%" color="#F0A030" />
+      </div>
+
+      {/* Dragon Guardian Signature Overlap */}
+      <div className="absolute right-0 top-0 bottom-0 pointer-events-none z-20 flex items-center justify-end pr-[clamp(10px,2vw,24px)]">
+        <div className="relative w-[clamp(80px,12vw,140px)] h-[clamp(80px,12vw,140px)] transform translate-y-[20%]">
+          <DragonGuardian />
+        </div>
       </div>
 
       {/* Mobile dot */}

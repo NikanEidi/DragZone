@@ -40,12 +40,8 @@ export function DragonGuardian() {
   return (
     <div
       ref={ref}
-      className="absolute z-[60] pointer-events-none"
+      className="w-full h-full pointer-events-none"
       style={{
-        top: "clamp(10px, 2vw, 24px)",
-        right: "clamp(10px, 2vw, 24px)",
-        width: "clamp(80px, 12vw, 150px)",
-        height: "clamp(80px, 12vw, 150px)",
         perspective: "1000px",
       }}
     >

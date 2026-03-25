@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Plus, MessageSquare, Trash2, ChevronLeft, ChevronRight, Database, Clock, Zap, PanelLeftClose } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import dragonDrag from "../../assets/dragon-drag.svg";
 
 interface Props {
@@ -14,22 +15,35 @@ interface Props {
   onToggleCollapse: () => void;
 }
 
-export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, open, onClose, collapsed, onToggleCollapse }: Props) {
+export const Sidebar = React.memo(function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, open, onClose, collapsed, onToggleCollapse }: Props) {
   const [hovId, setHovId] = useState<string | null>(null);
   const [newHov, setNewHov] = useState(false);
 
   // Optimized transition for NO LAG
   return (
     <>
-      {open && <div className="fixed inset-0 z-40 md:hidden transition-opacity duration-300" style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(10px)" }} onClick={onClose} />}
-      <aside className={`
-        fixed md:relative z-50 md:z-auto top-0 left-0 h-full
-        flex flex-col shrink-0 transition-all duration-300 cubic-bezier(0.2, 1, 0.3, 1)
-        liquid-glass overflow-hidden
-        ${collapsed ? "w-[80px]" : "w-[clamp(280px,28vw,350px)]"}
-        ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
-      `}
-      style={{ willChange: 'width, transform' }}>
+      <AnimatePresence>
+        {open && (
+           <motion.div 
+             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+             className="fixed inset-0 z-40 md:hidden" 
+             style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(5px)" }} 
+             onClick={onClose} 
+           />
+        )}
+      </AnimatePresence>
+      <motion.aside
+        layout
+        initial={false}
+        transition={{ type: "spring", stiffness: 350, damping: 35 }}
+        className={`
+          fixed md:relative z-50 md:z-auto top-0 left-0 h-full
+          flex flex-col shrink-0
+          liquid-glass overflow-hidden
+          ${collapsed ? "w-[80px]" : "w-[clamp(280px,28vw,350px)]"}
+          ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}
+        style={{ willChange: 'transform' }}>
         
         {/* ═══ DRAGON SKIN LAYERS — MAXIMUM IMPACT ═══ */}
         {/* Layer 1: Actual dragon SVG — bright and visible */}
@@ -46,15 +60,14 @@ export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, op
           mixBlendMode: "screen",
         }} />
 
-        {/* Layer 4: DRAMATIC side glow veins — thick and bright */}
-        <div className="absolute left-0 top-0 bottom-0 w-[4px] z-[5] pointer-events-none" style={{
-          background: "linear-gradient(to bottom, transparent 5%, rgba(0,240,255,0.5) 15%, rgba(176,38,255,0.8) 50%, rgba(0,240,255,0.5) 85%, transparent 95%)",
-          boxShadow: "2px 0 15px rgba(0,240,255,0.3), 4px 0 30px rgba(176,38,255,0.15)",
+        {/* Layer 4: Clean single side glow vein (Reduced stacking) */}
+        <div className="absolute left-0 top-0 bottom-0 w-[2px] z-[5] pointer-events-none" style={{
+          background: "linear-gradient(to bottom, transparent 5%, rgba(0,240,255,0.8) 15%, rgba(176,38,255,0.8) 50%, rgba(0,240,255,0.8) 85%, transparent 95%)",
+          boxShadow: "2px 0 10px rgba(0,240,255,0.3)",
           animation: "veinPulse 4s ease-in-out infinite",
         }} />
-        <div className="absolute right-0 top-0 bottom-0 w-[2px] z-[5] pointer-events-none" style={{
-          background: "linear-gradient(to bottom, transparent 10%, rgba(0,240,255,0.25) 25%, rgba(176,38,255,0.35) 50%, rgba(0,240,255,0.25) 75%, transparent 90%)",
-          boxShadow: "-2px 0 10px rgba(176,38,255,0.1)",
+        <div className="absolute right-0 top-0 bottom-0 w-[1px] z-[5] pointer-events-none" style={{
+          background: "linear-gradient(to bottom, transparent 10%, rgba(0,240,255,0.4) 50%, transparent 90%)",
         }} />
 
         {/* ═══ CONTENT ═══ */}
@@ -195,7 +208,7 @@ export function Sidebar({ conversations, activeId, onSelect, onNew, onDelete, op
             </div>
           )}
         </div>
-      </aside>
+      </motion.aside>
     </>
   );
-}
+});

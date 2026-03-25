@@ -50,7 +50,7 @@ interface Props {
   index: number;
 }
 
-export function MessageBubble({ message: m, index }: Props) {
+export const MessageBubble = React.memo(function MessageBubble({ message: m, index }: Props) {
   const [copied, setCopied] = useState(false);
   const [hov, setHov] = useState(false);
   const isU = m.role === "user";
@@ -276,4 +276,4 @@ export function MessageBubble({ message: m, index }: Props) {
       )}
     </div>
   );
-}
+});

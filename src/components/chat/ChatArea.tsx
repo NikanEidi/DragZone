@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import { Menu, Terminal, ArrowDown, ShieldCheck } from "lucide-react";
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { MessageBubble } from "./MessageBubble";
 import { TypingIndicator } from "./TypingIndicator";
 import { EmptyState } from "./EmptyState";
@@ -17,18 +18,23 @@ interface Props {
 }
 
 export function ChatArea({ messages, status, contextActive, onSend, onUpload, onShare, onToggleSidebar }: Props) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
   const [showScroll, setShowScroll] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, status]);
+    if (messages.length > 0) {
+      setTimeout(() => {
+        virtuosoRef.current?.scrollToIndex({ index: messages.length - 1, align: 'end', behavior: 'smooth' });
+      }, 50);
+    }
+  }, [messages.length, status]);
 
-  const onScroll = useCallback(() => {
-    if (!scrollRef.current) return;
-    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
-    setShowScroll(scrollHeight - scrollTop - clientHeight > 80);
+  const onScroll = useCallback((e: React.UIEvent<HTMLElement>) => {
+    const target = e.currentTarget;
+    if (!target) return;
+    const { scrollTop, scrollHeight, clientHeight } = target;
+    setShowScroll(scrollHeight - scrollTop - clientHeight > 150);
   }, []);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -105,20 +111,42 @@ export function ChatArea({ messages, status, contextActive, onSend, onUpload, on
         </div>
       </div>
 
-      {/* Messages Area */}
-      <div ref={scrollRef} onScroll={onScroll}
-        className="flex-1 overflow-y-auto px-[clamp(16px,2.5vw,32px)] py-[clamp(20px,2.5vw,32px)] pb-[180px] space-y-[clamp(20px,2.5vw,32px)] overscroll-contain relative z-10"
-        style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none" }}>
-        {messages.length === 0 && <EmptyState />}
-        {messages.map((m, i) => <MessageBubble key={m.id} message={m} index={i} />)}
-        {status === "typing" && <TypingIndicator />}
+      {/* Messages Area - Virtualized for buttery smooth scroll & render */}
+      <div className="flex-1 min-h-0 relative z-10">
+        {messages.length === 0 ? (
+          <div className="h-full overflow-y-auto px-[clamp(16px,2.5vw,32px)] py-[clamp(20px,2.5vw,32px)] pb-[180px]">
+             <EmptyState />
+          </div>
+        ) : (
+          <Virtuoso
+            ref={virtuosoRef}
+            data={messages}
+            initialTopMostItemIndex={messages.length - 1}
+            className="h-full w-full custom-scrollbar"
+            style={{ WebkitOverflowScrolling: "touch", scrollbarWidth: "none" }}
+            onScroll={onScroll}
+            components={{
+              Footer: () => (
+                <div className="px-[clamp(16px,2.5vw,32px)] pb-[180px] pt-[clamp(20px,2.5vw,32px)]">
+                  {status === "typing" && <TypingIndicator />}
+                </div>
+              ),
+              Header: () => <div className="h-[clamp(20px,2.5vw,32px)]" />
+            }}
+            itemContent={(index, m) => (
+              <div className="px-[clamp(16px,2.5vw,32px)] py-[clamp(10px,1.2vw,16px)]">
+                <MessageBubble message={m} index={index} key={m.id} />
+              </div>
+            )}
+          />
+        )}
       </div>
 
       {/* Scroll btn */}
       {showScroll && (
-        <button onClick={() => scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" })}
-          className="absolute bottom-[clamp(140px,16vw,160px)] right-[clamp(24px,3vw,40px)] z-30 p-3 rounded-full transition-all duration-200 hover:scale-105 active:scale-[0.95]"
-          style={{ background: "rgba(20,20,25,0.9)", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 8px 24px rgba(0,0,0,0.6)", color: "#888", backdropFilter: "blur(10px)" }}>
+        <button onClick={() => virtuosoRef.current?.scrollToIndex({ index: messages.length - 1, align: 'end', behavior: 'smooth' })}
+          className="absolute bottom-[clamp(140px,16vw,160px)] right-[clamp(24px,3vw,40px)] z-30 p-3 rounded-[12px] transition-all duration-200 hover:scale-[1.05] active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
+          style={{ background: "rgba(0,240,255,0.08)", border: "1px solid rgba(0,240,255,0.2)", boxShadow: "0 8px 24px rgba(0,0,0,0.6)", color: "#888", backdropFilter: "blur(10px)" }}>
           <ArrowDown size={20} className="hover:text-[#00F0FF] transition-colors" />
         </button>
       )}
