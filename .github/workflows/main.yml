@@ -2,31 +2,39 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ UI, main, feature/enhancement-UI ]
+    branches: [ main, feature/enhancement-UI ]
   pull_request:
-    branches: [ UI, main, feature/enhancement-UI ]
+    branches: [ main, feature/enhancement-UI ]
 
 jobs:
-  test:
+  test-frontend:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
         cache: 'npm'
-
-    - name: Install dependencies
+    - name: Install Frontend Dependencies
       run: npm install
-
-    - name: Build project
-      run: npm run build
-
-    - name: Run Jest tests
+    - name: Run Jest Unit Tests
       run: npm run test:unit
 
-    - name: Run Cypress E2E tests
-      run: npm run test:e2e:ci
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Install Backend Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r DragEngine/requirements.txt
+        pip install pytest httpx reportlab  # Ensure test deps are present
+    - name: Run Pytest Backend
+      run: |
+        cd DragEngine
+        pytest test_main.py

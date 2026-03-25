@@ -9,12 +9,14 @@ import type { Message, ChatStatus, Attachment } from "../../types/chat";
 interface Props {
   messages: Message[];
   status: ChatStatus;
+  contextActive: boolean;
   onSend: (text: string, attachments?: Attachment[]) => void;
+  onUpload: (files: FileList) => Promise<boolean>;
   onShare: () => void;
   onToggleSidebar: () => void;
 }
 
-export function ChatArea({ messages, status, onSend, onShare, onToggleSidebar }: Props) {
+export function ChatArea({ messages, status, contextActive, onSend, onUpload, onShare, onToggleSidebar }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showScroll, setShowScroll] = useState(false);
 
@@ -81,7 +83,13 @@ export function ChatArea({ messages, status, onSend, onShare, onToggleSidebar }:
 
       {/* Input Base */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
-        <InputBar onSend={onSend} onShare={onShare} hasMessages={messages.length > 0} />
+        <InputBar 
+          onSend={onSend} 
+          onUpload={onUpload}
+          onShare={onShare} 
+          hasMessages={messages.length > 0} 
+          isContextLoaded={contextActive}
+        />
       </div>
     </div>
   );
