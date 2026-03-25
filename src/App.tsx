@@ -21,13 +21,8 @@ export default function App() {
   });
 
   return (
-    <div {...swipeHandlers} className="h-[100dvh] w-screen overflow-hidden relative" style={{ background: "#0e1117" }}>
-      {/* Single subtle gradient — no continuous animations */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,240,255,0.04) 0%, transparent 60%)"
-      }} />
-
-      {/* App layout — zero decorative borders, zero particles */}
+    <div {...swipeHandlers} className="h-[100dvh] w-screen overflow-hidden relative" style={{ background: "#080a0f" }}>
+      {/* App layout — ZERO decorative borders, ZERO particles, ZERO blurs */}
       <div className="relative z-10 flex flex-col h-full">
         <Header status={status} />
         <div className="flex flex-1 min-h-0 relative">

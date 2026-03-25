@@ -58,12 +58,11 @@ export const MessageBubble = React.memo(function MessageBubble({ message: m, ind
       )}
 
       {/* Bubble */}
-      <div className="group" style={{ maxWidth: "min(600px, 78%)" }}>
-        <div className="rounded-xl overflow-hidden shadow-sm"
+      <div className="group" style={{ maxWidth: "min(600px, 85%)" }}>
+        <div className="rounded-lg overflow-hidden"
           style={{
-            background: isU ? "rgba(0,212,229,0.08)" : "rgba(22, 27, 34, 0.4)",
-            border: `1px solid ${isU ? "rgba(0,212,229,0.2)" : "var(--border, rgba(255,255,255,0.08))"}`,
-            backdropFilter: isU ? "none" : "blur(4px)",
+            background: isU ? "rgba(0,240,255,0.05)" : "#0d1117",
+            border: `1px solid ${isU ? "rgba(0,240,255,0.15)" : "rgba(255,255,255,0.08)"}`,
           }}>
 
           {/* Attachments */}

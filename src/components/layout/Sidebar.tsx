@@ -38,11 +38,11 @@ export const Sidebar = React.memo(function Sidebar({ conversations, activeId, on
         className="fixed md:relative z-50 md:z-auto top-0 left-0 h-full flex flex-col shrink-0 overflow-hidden"
         style={{
           width: sidebarWidth,
-          background: "var(--bg-panel, rgba(14,17,23,0.95))",
-          borderRight: "1px solid var(--border, rgba(255,255,255,0.06))",
-          transform: open ? "translateX(0)" : `translateX(-100%)`,
-          transition: "transform 100ms ease-out, width 100ms ease-out",
-          willChange: "transform",
+          background: "#0d1117",
+          borderRight: "1px solid rgba(255,255,255,0.06)",
+          transform: open ? "translateX(0)" : "translateX(-100%)",
+          transition: "transform 130ms cubic-bezier(0.4, 0, 0.2, 1), width 130ms cubic-bezier(0.4, 0, 0.2, 1)",
+          willChange: "transform, width",
         }}
       >
         {/* On md+ screens, sidebar is always visible via relative positioning — override transform */}
