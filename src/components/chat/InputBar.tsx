@@ -107,24 +107,29 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
         {/* Input row */}
         <div className="flex items-end gap-2 px-3 py-2.5">
           {/* Attach menu */}
-          <div className="relative shrink-0 attach-menu-container">
+          <div className="relative shrink-0 attach-menu-container z-[40]">
             <button onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center justify-center rounded-md hover:bg-white/5 active:scale-95 min-w-[44px] min-h-[44px]"
               style={{ color: menuOpen ? "var(--cyan)" : "var(--text-muted)", transition: "color 100ms" }}>
               <Plus size={20} style={{ transform: menuOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 150ms" }} />
             </button>
             {menuOpen && (
-              <div className="absolute bottom-[calc(100%+8px)] left-0 p-1.5 rounded-lg min-w-[170px] z-[100]"
-                style={{ background: "var(--bg-panel)", border: "1px solid var(--border)", boxShadow: "0 -8px 24px rgba(0,0,0,0.5)", animation: "fadeIn 100ms ease-out" }}>
-                <button onClick={() => { fileRef.current!.accept = "*/*"; fileRef.current?.click(); }} className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
-                  style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 500, transition: "background 100ms" }}>
-                  <Plus size={14} className="opacity-60" /> Upload File
+              <div className="absolute bottom-[calc(100%+12px)] left-0 p-1.5 rounded-lg min-w-[170px] z-[100]"
+                style={{ background: "var(--bg-panel, #0e1117)", border: "1px solid var(--border)", boxShadow: "0 8px 32px rgba(0,0,0,0.8)", animation: "fadeIn 100ms ease-out" }}>
+                <button 
+                  onClick={() => { if(fileRef.current) { fileRef.current.accept = "*/*"; fileRef.current.click(); } }} 
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-md w-full hover:bg-white/5 active:scale-[0.98] transition-colors"
+                  style={{ color: "var(--text-secondary)", fontSize: 13, fontWeight: 500 }}>
+                  <Plus size={16} className="text-[var(--cyan)]" /> 
+                  <span>Upload File</span>
                 </button>
-                <div className="h-px my-1 mx-2" style={{ background: "var(--border)" }} />
-                <button onClick={() => { fileRef.current!.accept = "image/*"; fileRef.current?.click(); }}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
-                  style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 500, transition: "background 100ms" }}>
-                  <ImageIcon size={14} className="opacity-60" /> Add Image
+                <div className="h-px my-1 mx-2 bg-white/5" />
+                <button 
+                  onClick={() => { if(fileRef.current) { fileRef.current.accept = "image/*"; fileRef.current.click(); } }}
+                  className="flex items-center gap-2.5 px-3 py-2.5 rounded-md w-full hover:bg-white/5 active:scale-[0.98] transition-colors"
+                  style={{ color: "var(--text-secondary)", fontSize: 13, fontWeight: 500 }}>
+                  <ImageIcon size={16} className="text-[var(--cyan)]" /> 
+                  <span>Add Image</span>
                 </button>
               </div>
             )}
