@@ -95,6 +95,214 @@ DragZone's logic is strictly mapped. Learn how to extend the Dragon by reviewing
 
 ---
 
+
+---
+
+## 📊 SYSTEM TELEMETRY & ARCHITECTURAL GRAPHS
+
+### 1. 🐉 Neural Engine State Machine (Mermaid)
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: Initialize Sequence
+    Idle --> ParsingProtocol: Omni-Drop Payload Detected
+    ParsingProtocol --> Extracting: Reading Blob Streams
+    Extracting --> Formatting: OCR / Text / Buffer Conversion
+    
+    state Formatting {
+        direction LR
+        PDF --> Text
+        XLSX --> PandasDataframe
+        Images --> LLaVAVisionVector
+    }
+    
+    Formatting --> Ready: Encrypted Data Injected
+    Ready --> Inference: User Query Received
+    
+    state Inference {
+        direction TB
+        Llama3.1 --> TokenStream: generating
+        TokenStream --> Websocket: streaming
+        Websocket --> ReactUI: dispatching state
+    }
+    
+    Inference --> Idle: Stream Closed / Output Complete
+```
+
+### 2. ⚛️ React Component Inter-Dependency Chart
+```mermaid
+classDiagram
+    class App {
+      +layoutMode: 'full' | 'split'
+      +sidebarCollapsed: boolean
+      +handleSystemInfo()
+    }
+    class Sidebar {
+      +conversations: Array
+      +setActive()
+      +delete()
+    }
+    class ChatArea {
+      +messages: Array
+      +isGenerating: boolean
+      +handleDrop()
+    }
+    class MessageBubble {
+      +isUser: boolean
+      +renderMarkdown()
+    }
+    class CodeFrame {
+      +language: string
+      +copyToClipboard()
+      +downloadSnippet()
+    }
+    class DragonGuardian {
+      +parallaxOffset: float
+      +render3D()
+    }
+    
+    App --> Sidebar : Controls State
+    App --> ChatArea : Passes Messages
+    App --> DragonGuardian : Global VFX
+    ChatArea --> MessageBubble : Renders
+    MessageBubble --> CodeFrame : Interprets
+```
+
+### 3. 🌐 API Gateway Network Topology
+```mermaid
+graph TD
+    UI[DragZone React App] ==>|WebSocket/HTTP| APIGW[FastAPI Gateway]
+    
+    subgraph "Core Server [Local Environment]"
+    APIGW -->|Memory Management| RAM[(Session State Buffer)]
+    APIGW -->|Python Core| Parser[Omni-Parser Scripts]
+    Parser --> Pandas[Pandas & PyPDF]
+    Parser --> CV[OpenCV/LLaVA Image Buffer]
+    end
+
+    APIGW ==>|Internal Port 11434| Ollama[Ollama Daemon]
+    
+    subgraph "Local AI Engine"
+    Ollama --> LLM[Llama 3.1 8B Instruct]
+    Ollama --> Vision[LLaVA Core]
+    Ollama --> Embedding[Nomic Embed Text v1.5]
+    end
+    
+    LLM ==> APIGW
+    APIGW ==> UI
+```
+
+### 4. 🗄️ Database Architecture (Entity Relationship)
+```mermaid
+erDiagram
+    CONVERSATION ||--o{ MESSAGE : contains
+    CONVERSATION {
+        string id PK
+        string title
+        datetime updated_at
+        int token_count
+    }
+    MESSAGE ||--o{ ATTACHMENT : includes
+    MESSAGE {
+        string id PK
+        string conversation_id FK
+        string role "user | assistant | system"
+        text content
+        datetime created_at
+    }
+    ATTACHMENT {
+        string id PK
+        string message_id FK
+        string type "pdf | csv | image"
+        binary raw_data
+        text parsed_context
+    }
+```
+
+### 5. ⏱️ Data Intake Sequence flow
+```mermaid
+sequenceDiagram
+    actor User
+    participant DZ as DragZone Client
+    participant API as FastAPI Backend
+    participant Parser as Omni-Parser Module
+    participant LLM as Ollama Link
+    
+    User->>DZ: Drag & Drops 50MB PDF File
+    DZ->>DZ: Validate Filetype & Limit
+    DZ->>API: POST /api/upload (FormData)
+    API->>Parser: Stream file to chunked buffer
+    Parser-->>Parser: Optical Character Recognition
+    Parser-->>API: Return clean unified Text Block
+    API-->>DZ: Upload Successful (Context Ready)
+    User->>DZ: Send Message ("Summarize data")
+    DZ->>LLM: Stream (Context + Message)
+    LLM-->>DZ: Real-time Markdown token stream
+    DZ-->>User: Displays syntax-highlighted summary
+```
+
+---
+
+## 💻 ALGORITHMIC PSEUDOCODE: DRAGON HEURISTICS
+
+### The "Liquid Glass" Parallax Calculus
+```pseudocode
+function computeSubpixelDragonOffset(mouseX, mouseY, screenWidth, screenHeight):
+    // Standardize input bounds
+    normX = (mouseX / screenWidth) - 0.5
+    normY = (mouseY / screenHeight) - 0.5
+    
+    // Apply heavy-mass damping filter to simulate massive dragon head weight
+    damping_factor = 0.08
+    targetRotationX = normY * -12.0 degrees  // Inverted Y-axis for organic feel
+    targetRotationY = normX * 18.0 degrees   // Wider sweep on horizontal
+    
+    // Use Lerp (Linear Interpolation) on RAF (Request Animation Frame)
+    currentRotX = lerp(currentRotX, targetRotationX, damping_factor)
+    currentRotY = lerp(currentRotY, targetRotationY, damping_factor)
+    
+    // Inject glow-matrix color shift based on velocity
+    velocity = abs(currentRotX - previousRotX) + abs(currentRotY - previousRotY)
+    glowIntensity = clamp(0.2, 1.0, baseGlow + (velocity * 1.5))
+    
+    execute css `transform: perspective(1000px) rotateX(${currentRotX}) rotateY(${currentRotY})`
+    execute css `filter: drop-shadow(0 0 ${glowIntensity}px var(--cyan))`
+```
+
+### Stream Pipeline Interrupt Handling
+```pseudocode
+function ingestOllamaLLMStream(contextPayload):
+    let abortController = new AbortController()
+    
+    // Initialize secure socket
+    connection = await fetch('localhost:11434/api/chat', {
+        method: "POST",
+        body: json(contextPayload),
+        signal: abortController.signal
+    })
+    
+    reader = connection.body.getReader()
+    decoder = new TextDecoder("utf-8")
+    
+    while True:
+        chunk, isDone = await reader.read()
+        if isDone: break
+        
+        // Decode chunk matrix
+        matrixText = decoder.decode(chunk, stream: true)
+        lines = matrixText.split('\n')
+        
+        for line in lines:
+            if line.isEmpty(): continue
+            
+            payload = JSON.parse(line)
+            if payload.error: throw NeuralLinkException(payload.error)
+            
+            // Dispatch specifically to Redux/React State without full unmount
+            State.buffer += payload.message.content
+            UI.triggerTickRender()
+```
+
+
 <details>
 <summary><h2>🔥 DRAGZONE CORE: COMPLETE CODEBASE REPOSITORY</h2></summary>
 
