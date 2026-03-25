@@ -1,10 +1,12 @@
-# <img src="UIcomponents/Frame/Icon.svg" width="60" height="60" valign="middle" /> DragZone: The Cyber Dragon Protocol (v1.2.0)
+# <img src="UIcomponents/Frame/Icon.svg" width="48" height="48" valign="middle" /> DragZone AI Assistant (v1.1.3 - Tag 3)
 
-[![CI/CD Pipeline](https://github.com/NikanEidi/DragZone/actions/workflows/main.yml/badge.svg)](https://github.com/NikanEidi/DragZone/actions)
-![UI Status](https://img.shields.io/badge/UI_Status-Enterprise_Hardened-00F0FF?style=for-the-badge&logo=react)
-![Backend](https://img.shields.io/badge/Backend-FastAPI_Modular-9055E0?style=for-the-badge&logo=fastapi)
-![Testing](https://img.shields.io/badge/Full_Stack_Tests-100%25_Pass-B026FF?style=for-the-badge)
-
+[![CI/CD Testing Pipeline](https://github.com/NikanEidi/DragZone/actions/workflows/main.yml/badge.svg)](https://github.com/NikanEidi/DragZone/actions)
+![UI Version](https://img.shields.io/badge/UI_Status-Backend_Ready-00F0FF?style=for-the-badge&logo=react&labelColor=1a1a2e)
+![Testing](https://img.shields.io/badge/Tests-Pass-B026FF?style=for-the-badge&logo=jest)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 ---
 
 ## 🐉 The Vision
