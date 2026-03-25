@@ -14,13 +14,13 @@ DragZone isn't just a chat interface; it's an immersive terminal designed for th
 
 - **Neural Background System**: Multi-layered parallax backgrounds with hex-grid overlays and "Cyber-Aurora" atmosphere.
 - **Dragon Guardian Mascot**: A titanic, high-fidelity static signature sitting in the core header, keeping watch over your sessions.
+- **Brand Immersion**: Re-branded with the custom `dragon-icon.svg` favicon and high-fidelity social sharing layouts (`og-image.png`).
 - **Liquid Glass UI**: Ultra-blurred translucency (`30px` backdrop) with premium border-glow and SVG dragon-skin textures.
-- **Micro-Animation Layer**: Subtle heart-pulses, holographic particle fields, and responsive tactile feedback on every interaction.
 
 ## 🚀 Core Features
 
 ### 🤖 Local Neural Processing (Ollama)
-- Direct integration with local LLM instances (default: `localhost:8000/api/chat`).
+- Direct integration with local LLM instances (default: `localhost:11434/api/generate`).
 - **Privacy First**: No data leaves your machine. All reasoning happens locally behind the "Encrypted Link."
 - **Streaming Response**: Real-time token streaming with beautiful markdown rendering.
 
@@ -40,7 +40,7 @@ Seamlessly inject context from complex document types into your AI's reasoning e
 
 Built for the **MacBook 14"**, **iPad Pro**, and **iPhone**, DragZone scales gracefully across all viewports:
 - **Responsive Layout Engine**: Uses advanced CSS `clamp()` and `vh/vw` units for perfect scaling without breakpoints.
-- **Home Screen App**: Tap **'Share'** > **'Add to Home Screen'** on iOS/iPadOS to lock the interface into a true full-screen PWA experience.
+- **Home Screen App**: Web Manifest enabled. Tap **'Share'** > **'Add to Home Screen'** on iOS/iPadOS for a borderless PWA experience.
 - **Gesture Control**: Swipe to toggle sidebars and manage session lists with native-feeling animations.
 
 ## 🛠️ Deployment & Launch

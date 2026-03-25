@@ -1,64 +1,54 @@
-# 🏗️ DragZoneAI Architecture Documentation (Tag 3 - UI Complete)
+# 🏗️ DragZone Architecture Documentation (v1.2.0)
 
 **Author:** Nikan Eidi  
-**Application:** DragZoneAI (Copy)
+**Application:** DragZone — AI Cyber-Engine
 
 ## 📋 Overview
 
-DragZoneAI is a high-immersion AI chat application built on a **Strict Modular MVC (Model-View-Controller)** pattern. This architectural choice was made to ensure deep maintainability, scalability, and clean integration with local LLM models (e.g., Ollama).
+DragZone is a high-immersion AI chat application built on a **Strict Modular MVC (Model-View-Controller)** pattern. This architectural choice ensures deep maintainability, scalability, and clean integration with local LLM models (e.g., Ollama).
 
 ---
 
 ## 🏛️ MVC Layers
 
 ### 1. Models (State & Data)
-- **File**: `src/types/chat.ts`
-- **Responsibility**: Defines the core data structures used throughout the application, including `Message`, `Conversation`, `Attachment`, and `ChatStatus`.
-- **Implementation**: Local state managers (React `useState` within custom hooks) act as the transient data store before connecting to persistent layers.
+- **Typed Interfaces**: `src/types/chat.ts` defines the core data structures (`Message`, `Conversation`, `Attachment`).
+- **Data Fetching**: Custom hooks (`useChat.ts`, `useOllama.ts`) act as the transient data store and API handlers.
 
 ### 2. Views (UI & Rendering)
-- **File**: `src/components/`
-- **Responsibility**: The presentation layer, divided into highly atomic modules.
-- **Key Modules**:
-  - `chat/`: Input bars, bubble systems, and typing indicators.
-  - `layout/`: Global structure including the Cyber Sidebar and Responsive Header.
-  - `effects/`: Specialized visual effect layers (VFX) that provide the "Cyberpunk-Dragon" immersion.
-  - `ui/` & `ui-custom/`: Themed wrappers like `GlassFrame.tsx`, `PowerCore.tsx`, and `StatusPill.tsx`.
+- **Atomic Components**: `src/components/chat/` handles input and message rendering.
+- **VFX Layers**: `src/components/effects/` manages GPU-accelerated atmospheric effects.
+- **Themed UI**: `src/components/ui-custom/` provides the "Liquid Glass" and "PowerCore" interactive components.
 
 ### 3. Controllers (Business Logic)
-- **File**: `src/hooks/`
-- **Responsibility**: Orchestrating application state, handling user input, and managing external API calls.
-- **Key Hooks**:
-  - `useChat.ts`: Main controller for managing conversations and message dispatching.
-  - `useOllama.ts`: Controller stub pre-architected to handle future fetch streams to a local Ollama endpoint.
+- **Central Intelligence**: `src/App.tsx` orchestrates global state, including `layoutMode`, `sidebarCollapsed`, and `showSystemInfo`.
+- **Logic Hooks**: `useChat.ts` manages the conversation lifecycle and message dispatching.
 
 ---
 
 ## 🏎️ Performance & VFX Strategy
 
-To maintain **60FPS even on tablet hardware** (e.g., iPad Mini), the project employs several specialized techniques:
+To maintain **60FPS** across all devices (MacBook, iPad, Mobile):
 
-- **Isolated Canvas Layers**: Complex animations like `CloudVape` and `ParticleField` use `requestAnimationFrame` on an isolated HTML5 Canvas. This prevents expensive DOM repaints by keeping visual noise off the main thread.
-- **GPU-Centric CSS**: Animations for `DragonGuardian` and the input system use `translate3d(0, 0, 0)` and `will-change` properties to force GPU layer compositing.
-- **Fluid Layout Engine**: The application relies extensively on CSS `clamp()` and relative units (vh, vw, rem). This allows the UI to scale seamlessly across device sizes without relying on heavy media query breakpoints.
-
----
-
-## 🤖 LLM Integration Plan
-
-The architecture is built with **Ollama** in mind. The `useOllama` hook is designed to:
-- Establish a connection to the local Ollama HTTP endpoint (default `localhost:11434`).
-- Stream generated text chunks incrementally into the `useChat` controller.
-- Handle metadata and context injection for themed "Dragon Protocol" responses.
+- **GPU Offloading**: Uses `translate3d(0, 0, 0)` and `will-change` to force layer compositing for high-fidelity assets like the `DragonGuardian`.
+- **Fluid Layout**: Extensively uses CSS `clamp()` and relative units to minimize layout shifts (CLS) across viewports.
+- **Asset Optimization**: High-fidelity SVGs are used for branding signatures to ensure crispness at any resolution.
 
 ---
 
-## 🎨 Design System
+## 🤖 LLM Integration
 
-DragZoneAI implements a custom design system centered around:
-- **Translucency**: 30px Backdrop blurring + high-contrast text.
-- **Tactility**: Custom SVG "Dragon Leather" textures overlays.
-- **Responsive Borders**: Frame assets dynamically adjusted based on viewport dimensions.
+The architecture is built for **Ollama** (Local AI):
+- **Endpoint**: Connects to `localhost:11434`.
+- **Streaming**: Incremental text streaming into the `useChat` controller for real-time responsiveness.
+- **Context Injection**: Dedicated Omni-Parser layer for injecting PDF, CSV, and image data into the AI's reasoning engine.
+
+---
+
+## 🎨 Branding Immersion
+
+- **Signature Mascot**: A high-fidelity, pinned `DragonGuardian` component provides the visual anchor for the brand.
+- **Web Identity**: Integrated `favicon.svg`, `og-image.png`, and `manifest.webmanifest` for a professional, platform-native feel.
 
 ---
 

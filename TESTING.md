@@ -1,4 +1,4 @@
-# 🧪 Testing Documentation - DragZoneAI (v1.1.3 - Tag 3)
+# 🧪 Testing Documentation — DragZone (v1.2.0)
 
 This project uses a layered testing strategy to ensure high performance and reliability.
 
@@ -31,7 +31,7 @@ npm run cypress:open
 ```
 
 ## 🤖 GitHub Actions Workflow
-Every push and pull request to the `UI` and `main` branches triggers the CI pipeline, which:
+Every push and pull request to the `main` branch triggers the CI pipeline, which:
 1. Installs dependencies.
 2. Builds the project.
 3. Runs all unit tests.
