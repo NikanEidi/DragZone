@@ -13,43 +13,30 @@ interface Props {
 
 export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoaded }: Props) {
   const [input, setInput] = useState("");
-  const [sendHov, setSendHov] = useState(false);
-  const [attachHov, setAttachHov] = useState(false);
-  const [shareHov, setShareHov] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [attachments, setAttachments] = useState<Attachment[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-  
-  const barRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
 
   const has = input.trim().length > 0 || attachments.length > 0;
 
   const send = useCallback(() => {
     if (!input.trim() && attachments.length === 0) return;
     onSend(input.trim(), attachments.length > 0 ? attachments : undefined);
-    setInput("");
-    setAttachments([]);
+    setInput(""); setAttachments([]);
     if (inputRef.current) inputRef.current.style.height = 'auto';
     inputRef.current?.focus();
   }, [input, attachments, onSend]);
 
   const handleFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
+    if (!files?.length) return;
     setIsUploading(true);
     const success = await onUpload(files);
-    
     if (success) {
-      const newAtts: Attachment[] = Array.from(files).map(f => ({
-        id: uid(), name: f.name, size: f.size, type: f.type,
-      }));
-      setAttachments(prev => [...prev, ...newAtts]);
+      setAttachments(prev => [...prev, ...Array.from(files).map(f => ({ id: uid(), name: f.name, size: f.size, type: f.type }))]);
     }
-    
     setIsUploading(false);
     e.target.value = "";
     setMenuOpen(false);
@@ -62,187 +49,95 @@ export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoad
     }
   }, [input]);
 
-  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    if (!barRef.current || !glowRef.current) return;
-    const rect = barRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    glowRef.current.style.background = `radial-gradient(circle 120px at ${x}% ${y}%, rgba(255,255,255,0.08), transparent 100%)`;
-  }, []);
-
   return (
-    <div className="relative shrink-0 px-[clamp(12px,2vw,32px)] pb-[clamp(12px,2vw,24px)] pt-[16px] w-full"
-      onPointerMove={handlePointerMove}
-    >
-      <div 
-        ref={barRef}
-        className="relative w-full rounded-[24px] overflow-hidden transition-all duration-300 ease-out"
+    <div className="relative shrink-0 px-4 pb-4 pt-2 w-full">
+      <div className="relative w-full rounded-xl overflow-hidden"
         style={{
-          background: has 
-            ? "rgba(22, 22, 28, 0.75)" 
-            : "rgba(18, 18, 22, 0.65)",
-          backdropFilter: "blur(30px) saturate(120%)",
-          border: has 
-            ? "1px solid rgba(0, 240, 255, 0.2)" 
-            : "1px solid rgba(255, 255, 255, 0.05)",
-          boxShadow: has ? `
-            inset 0 1px 1px rgba(255,255,255,0.08),
-            0 15px 30px rgba(0,0,0,0.8),
-            0 0 15px rgba(0, 240, 255, 0.1)
-          ` : `
-            inset 0 1px 1px rgba(255,255,255,0.05),
-            0 10px 25px rgba(0,0,0,0.6)
-          `,
-          transform: has ? "translateY(-2px)" : "translateY(0)"
-        }}
-      >
-        {/* Status indicator for Context */}
+          background: "var(--bg-panel)",
+          border: `1px solid ${has ? "rgba(0,212,229,0.2)" : "var(--border)"}`,
+          transition: "border-color 100ms",
+        }}>
+        
+        {/* Context status */}
         {(isUploading || isContextLoaded) && (
-            <div className="absolute top-0 right-6 px-3 py-1 rounded-b-[8px] z-20 flex items-center gap-2 animate-[fadeSlideIn_0.3s_ease-out]"
-                 style={{ background: isUploading ? "rgba(176,38,255,0.1)" : "rgba(0,240,255,0.1)", border: isUploading ? "1px solid rgba(176,38,255,0.2)" : "1px solid rgba(0,240,255,0.2)", borderTop: "none" }}>
-                <div className={`w-1.5 h-1.5 rounded-full ${isUploading ? 'animate-pulse bg-[#B026FF]' : 'bg-[#00F0FF]'}`} />
-                <span style={{ fontSize: '10px', fontWeight: 600, color: isUploading ? '#B026FF' : '#00F0FF', letterSpacing: '1px' }}>
-                    {isUploading ? 'PROCESSING CONTEXT...' : 'CONTEXT SYNCED'}
-                </span>
-            </div>
+          <div className="absolute top-0 right-4 px-2 py-0.5 rounded-b text-xs z-20 flex items-center gap-1.5"
+            style={{ background: "var(--bg-surface)", border: "1px solid var(--border)", borderTop: "none", fontFamily: "var(--font-mono)" }}>
+            <div className={`w-1.5 h-1.5 rounded-full ${isUploading ? 'bg-[var(--purple)]' : 'bg-[var(--cyan)]'}`} />
+            <span style={{ fontSize: 9, fontWeight: 500, color: isUploading ? "var(--purple)" : "var(--cyan)" }}>
+              {isUploading ? 'PARSING...' : 'CTX SYNCED'}
+            </span>
+          </div>
         )}
 
-        {/* Subtle Inner Glow on Focus */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,240,255,0.03)] to-[rgba(176,38,255,0.03)] pointer-events-none opacity-0 transition-opacity duration-300" style={{ opacity: has ? 1 : 0 }} />
-
-        {/* Professional Matte Dragon Leather Base */}
-        <div className="absolute inset-0 pointer-events-none z-0 mix-blend-overlay opacity-[0.2] dragon-skin-realistic" />
-
-        {/* Dynamic Pointer Glow (Fast CSS) - Professional, subtle */}
-        <div ref={glowRef} className="absolute inset-0 rounded-[24px] pointer-events-none transition-opacity duration-200 mix-blend-screen z-0"
-          style={{
-            background: isUploading 
-                ? `radial-gradient(circle 120px at 50% 50%, rgba(176,38,255,0.15), transparent 100%)`
-                : `radial-gradient(circle 120px at 50% 50%, rgba(255,255,255,0.08), transparent 100%)`,
-            opacity: has || isUploading ? 0.8 : 0.4,
-            willChange: 'background, opacity'
-          }}
-        />
-
-        {/* Attachments Area */}
+        {/* Attachments */}
         {attachments.length > 0 && (
-          <div className="relative z-10 flex flex-wrap gap-2.5 p-3 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.2)]">
+          <div className="flex flex-wrap gap-1.5 p-2" style={{ borderBottom: "1px solid var(--border)" }}>
             {attachments.map(att => (
-              <div key={att.id} className="flex items-center gap-2 px-3 py-1.5 rounded-[10px] group cursor-pointer hover:bg-[rgba(255,255,255,0.05)] transition-all duration-200 ease-out"
-                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
-                {att.type.startsWith('image/') ? (
-                  <ImageIcon size={13} style={{ color: "#888" }} className="group-hover:text-[#00F0FF] transition-colors" />
-                ) : (
-                  <Paperclip size={13} style={{ color: "#888" }} className="group-hover:text-[#00F0FF] transition-colors" />
-                )}
-                <span style={{ fontFamily: "system-ui, -apple-system, sans-serif", fontSize: "12px", color: "#CCC", fontWeight: 500 }}>{att.name}</span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity ml-1" style={{ fontSize: "14px", color: "#FF4444" }}>&times;</span>
+              <div key={att.id} className="flex items-center gap-1.5 px-2 py-1 rounded text-xs"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)", color: "var(--text-secondary)" }}>
+                {att.type.startsWith('image/') ? <ImageIcon size={11} /> : <Paperclip size={11} />}
+                <span style={{ fontSize: 11 }}>{att.name}</span>
               </div>
             ))}
           </div>
         )}
 
-        {/* Input layout */}
-        <div className="relative z-10 flex items-end gap-[clamp(8px,1.5vw,16px)] px-[clamp(12px,1.5vw,20px)] py-[clamp(10px,1.2vw,14px)]">
-          
-          {/* Action Menu (Attach) */}
+        {/* Input row */}
+        <div className="flex items-end gap-2 px-3 py-2.5">
+          {/* Attach menu */}
           <div className="relative shrink-0">
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              onMouseEnter={() => setAttachHov(true)}
-              onMouseLeave={() => setAttachHov(false)}
-              className="p-3 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
-              style={{
-                background: menuOpen ? "rgba(255,255,255,0.08)" : "transparent",
-                color: attachHov || menuOpen ? "#00F0FF" : "#666",
-              }}
-            >
-              <Plus size={22} style={{ 
-                transform: menuOpen ? "rotate(45deg)" : "rotate(0)", 
-                transition: "transform 0.2s ease-out",
-              }} />
+            <button onClick={() => setMenuOpen(!menuOpen)}
+              className="flex items-center justify-center rounded-md hover:bg-white/5 active:scale-95 min-w-[44px] min-h-[44px]"
+              style={{ color: menuOpen ? "var(--cyan)" : "var(--text-muted)", transition: "color 100ms" }}>
+              <Plus size={20} style={{ transform: menuOpen ? "rotate(45deg)" : "rotate(0)", transition: "transform 150ms" }} />
             </button>
-            
-            {/* Pop-up attach menu */}
             {menuOpen && (
-              <div className="absolute bottom-[calc(100%+16px)] left-0 p-2 rounded-[16px] flex flex-col gap-1 min-w-[160px] animate-[fadeIn_0.2s_ease-out] liquid-glass shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-                <button onClick={() => fileRef.current?.click()} className="flex items-center gap-3 px-3 py-2.5 rounded-[10px] hover:bg-[rgba(255,255,255,0.05)] active:scale-[0.98] text-[#CCC] font-['system-ui'] text-[13px] font-medium transition-all duration-200">
-                  <Paperclip size={16} color="#888" /> Upload File
+              <div className="absolute bottom-[calc(100%+8px)] left-0 p-1.5 rounded-lg min-w-[150px]"
+                style={{ background: "var(--bg-panel)", border: "1px solid var(--border)", animation: "fadeIn 100ms ease-out" }}>
+                <button onClick={() => fileRef.current?.click()} className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
+                  style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 500, transition: "background 100ms" }}>
+                  <Paperclip size={14} /> Upload File
                 </button>
-                <div className="h-[1px] bg-[rgba(255,255,255,0.05)] my-0.5 mx-2" />
-                <button onClick={() => { if(fileRef.current) { fileRef.current.accept="image/*"; fileRef.current.click(); } }} className="flex items-center gap-3 px-3 py-2.5 rounded-[10px] hover:bg-[rgba(255,255,255,0.05)] active:scale-[0.98] text-[#CCC] font-['system-ui'] text-[13px] font-medium transition-all duration-200">
-                  <ImageIcon size={16} color="#888" /> Add Image
+                <div className="h-px my-0.5 mx-2" style={{ background: "var(--border)" }} />
+                <button onClick={() => { if(fileRef.current) { fileRef.current.accept="image/*"; fileRef.current.click(); } }}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-md w-full hover:bg-white/5 active:scale-[0.98]"
+                  style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 500, transition: "background 100ms" }}>
+                  <ImageIcon size={14} /> Add Image
                 </button>
               </div>
             )}
           </div>
           <input ref={fileRef} type="file" multiple className="hidden" onChange={handleFile} />
 
-          {/* Text Input area (Auto-resizing native feel) */}
-          <div className="flex-1 flex flex-col justify-end min-h-[40px] py-1 relative">
+          {/* Text area */}
+          <div className="flex-1 min-h-[36px] flex flex-col justify-end">
             <textarea
-              ref={inputRef}
-              rows={1}
-              value={input}
+              ref={inputRef} rows={1} value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  send();
-                }
-              }}
-              placeholder="Message Dragzone..."
-              autoComplete="off"
-              autoCorrect="off"
-              spellCheck={false}
-              className="w-full bg-transparent outline-none resize-none overflow-y-auto relative z-10"
+              onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+              placeholder="Message DrafZone..."
+              autoComplete="off" autoCorrect="off" spellCheck={false}
+              className="w-full bg-transparent outline-none resize-none overflow-y-auto"
               style={{
-                fontFamily: "system-ui, -apple-system, sans-serif",
-                fontSize: "clamp(15px, 1.6vw, 16px)",
-                fontWeight: 400,
-                color: "#E0E0E0",
-                letterSpacing: "0.2px",
-                caretColor: "#00F0FF",
-                lineHeight: "1.5",
-                scrollbarWidth: "none",
-                WebkitUserSelect: "text",
-                userSelect: "text",
-                touchAction: "manipulation",
+                fontFamily: "var(--font-ui)", fontSize: 14, fontWeight: 400,
+                color: "var(--text-primary)", caretColor: "var(--cyan)",
+                lineHeight: 1.5, scrollbarWidth: "none",
               }}
             />
           </div>
 
-          {/* Action Buttons Right */}
-          <div className="flex items-center gap-2 shrink-0 relative z-10">
+          {/* Right actions */}
+          <div className="flex items-center gap-1 shrink-0">
             {hasMessages && (
-              <button
-                onClick={onShare}
-                onMouseEnter={() => setShareHov(true)}
-                onMouseLeave={() => setShareHov(false)}
-                className="p-3 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
-                style={{ color: shareHov ? "#4A9BD9" : "#666" }}
-                title="Share Context"
-              >
-                <Share2 size={20} />
+              <button onClick={onShare} className="flex items-center justify-center rounded-md hover:bg-white/5 active:scale-95 min-w-[44px] min-h-[44px]"
+                style={{ color: "var(--text-muted)", transition: "color 100ms" }} title="Share">
+                <Share2 size={18} />
               </button>
             )}
-
-            <button
-              onClick={send}
-              onMouseEnter={() => setSendHov(true)}
-              onMouseLeave={() => setSendHov(false)}
-              disabled={!has}
-              className="p-3 rounded-[12px] transition-all duration-300 ease-out active:scale-[0.95] flex items-center justify-center relative overflow-hidden group min-w-[44px] min-h-[44px]"
-              style={{
-                background: has ? "rgba(0, 240, 255, 0.1)" : "transparent",
-                color: has ? "#00F0FF" : "#444",
-                cursor: has ? "pointer" : "default",
-              }}
-            >
-              <Send size={20} style={{
-                transform: sendHov && has ? "translateX(2px) translateY(-2px)" : "translateX(0) translateY(0)",
-                transition: "all 0.2s ease-out"
-              }} />
+            <button onClick={send} disabled={!has}
+              className="flex items-center justify-center rounded-md active:scale-95 min-w-[44px] min-h-[44px]"
+              style={{ background: has ? "rgba(0,212,229,0.1)" : "transparent", color: has ? "var(--cyan)" : "var(--text-muted)", cursor: has ? "pointer" : "default", transition: "background 100ms" }}>
+              <Send size={18} />
             </button>
           </div>
         </div>

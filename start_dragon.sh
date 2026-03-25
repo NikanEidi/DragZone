@@ -1,70 +1,55 @@
 #!/bin/bash
-# ==============================================================================
-# 🐉 DRAGZONE CYBER DRAGON: UNIFIED NETWORK-READY BOOTLOADER
-# ==============================================================================
+# ═══════════════════════════════════════════════════════
+# DRAFZONE UNIFIED BOOTLOADER v3.0
+# ═══════════════════════════════════════════════════════
+set -e
 
-# Optimized for MacBook & iPad Air (Network Mode)
+RED='\033[0;31m'; CYAN='\033[0;36m'; GREEN='\033[0;32m'; NC='\033[0m'; BOLD='\033[1m'
 
-# Colors for the terminal
-CYAN='\033[0;36m'
-GREEN='\033[0;32m'
-PURPLE='\033[0;35m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-NC='\033[0m'
+echo -e "${CYAN}${BOLD}═══ DRAFZONE ENGINE ═══${NC}"
+echo ""
 
-echo -e "=================================================="
-echo -e "🐉 Waking up the Cyber Dragon for Network Access..."
-echo -e "=================================================="
+# Kill any existing processes on our ports
+for PORT in 8000 5173; do
+  PID=$(lsof -ti:$PORT 2>/dev/null || true)
+  if [ -n "$PID" ]; then
+    echo -e "${RED}Killing process on port $PORT (PID: $PID)${NC}"
+    kill -9 $PID 2>/dev/null || true
+  fi
+done
 
-# Cleanup function to kill background processes on exit
+# Detect local IP
+LOCAL_IP=$(ipconfig getifaddr en0 2>/dev/null || echo "localhost")
+
+# Trap for clean shutdown
 cleanup() {
-    echo -e "\n🛑 Protocol Termination Initiated. Shutting down systems..."
-    # Kill the background process groups
-    kill 0 2>/dev/null
-    exit 0
+  echo -e "\n${RED}Shutting down...${NC}"
+  kill $BACK_PID $FRONT_PID 2>/dev/null
+  wait $BACK_PID $FRONT_PID 2>/dev/null
+  echo -e "${GREEN}Clean exit.${NC}"
+  exit 0
 }
-
-# Trap SIGINT (Ctrl+C) and SIGTERM
 trap cleanup SIGINT SIGTERM
 
-# Detect Local IP for iPad Access
-IP_ADDR=$(ipconfig getifaddr en0)
-if [ -z "$IP_ADDR" ]; then
-    IP_ADDR="localhost"
-    echo -e "⚠️ No local IP detected. Using localhost."
-else
-    echo -e "📱 IPAD ACCESS URL: http://$IP_ADDR:5173"
-fi
-
-# 🧠 STEP 1: START DRAGON ENGINE (FastAPI)
-echo -e "🚀 Launching DragEngine (Backend: Port 8000)..."
-cd DragEngine
-# Check if port 8000 is occupied
-if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null ; then
-    echo -e "⚠️ Port 8000 is busy. Attempting to clear..."
-    kill -9 $(lsof -ti:8000) 2>/dev/null
-fi
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload &
-BACKEND_PID=$!
+# Start backend
+echo -e "${GREEN}▸ Starting FastAPI backend on 0.0.0.0:8000${NC}"
+cd DragEngine && uvicorn main:app --host 0.0.0.0 --port 8000 --reload &
+BACK_PID=$!
 cd ..
 
-# ⚡ STEP 2: START DRAGZONE UI (React Network Mode)
-echo -e "🚀 Launching DragZone UI (Frontend: Port 5173)..."
-# Check if port 5173 is occupied
-if lsof -Pi :5173 -sTCP:LISTEN -t >/dev/null ; then
-    echo -e "⚠️ Port 5173 is busy. Attempting to clear..."
-    kill -9 $(lsof -ti:5173) 2>/dev/null
-fi
-npm run dev -- --host &
-FRONTEND_PID=$!
+# Start frontend
+echo -e "${GREEN}▸ Starting Vite frontend on 0.0.0.0:5173${NC}"
+npx vite --host 0.0.0.0 --port 5173 &
+FRONT_PID=$!
 
-echo -e "\n✨ DRAGON PROTOCOL ONLINE!"
-echo -e "--------------------------------------------------"
-echo -e "Frontend: http://localhost:5173  |  http://$IP_ADDR:5173"
-echo -e "Backend:  http://localhost:8000  |  http://$IP_ADDR:8000"
-echo -e "--------------------------------------------------"
-echo -e "Press Ctrl+C to enter Deep Sleep mode (Shutdown)."
+sleep 2
+echo ""
+echo -e "${CYAN}${BOLD}════════════════════════════════════════${NC}"
+echo -e "${CYAN}  MacBook:  http://localhost:5173${NC}"
+echo -e "${CYAN}  iPad/LAN: http://${LOCAL_IP}:5173${NC}"
+echo -e "${CYAN}  API:      http://${LOCAL_IP}:8000/docs${NC}"
+echo -e "${CYAN}${BOLD}════════════════════════════════════════${NC}"
+echo ""
+echo -e "${GREEN}Press Ctrl+C to stop all services.${NC}"
 
-# Wait for background processes
 wait
