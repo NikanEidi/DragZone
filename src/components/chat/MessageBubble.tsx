@@ -8,15 +8,29 @@ import type { Message } from "../../types/chat";
 import dragonIcon from "../../assets/dragon-layer.svg";
 
 function downloadSnippet(code: string, language: string) {
-  // Map common languages to extensions
+  // Enhanced dynamic file naming
   const extMap: Record<string, string> = {
     typescript: 'ts', javascript: 'js', python: 'py', 
     json: 'json', yaml: 'yml', html: 'html', css: 'css',
-    bash: 'sh', shell: 'sh'
+    bash: 'sh', shell: 'sh', markdown: 'md', java: 'java'
   };
   
   const ext = extMap[language.toLowerCase()] || 'txt';
-  const filename = `snippet-${Date.now()}.${ext}`;
+  
+  // High-performance inference for filename
+  let baseName = 'snippet';
+  const firstLine = code.trim().split('\n')[0].toLowerCase();
+  
+  if (firstLine.includes('class ') || firstLine.includes('function ')) {
+     const match = firstLine.match(/(class|function)\s+([a-zA-Z0-9_]+)/);
+     if (match && match[2]) baseName = match[2];
+  } else if (code.includes('---')) { // Likely YAML/Workflow
+     baseName = 'workflow_config';
+  } else if (code.length > 50) {
+     baseName = 'dragon_engine_logic';
+  }
+
+  const filename = `${baseName}-${Date.now()}.${ext}`;
   
   const blob = new Blob([code], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
