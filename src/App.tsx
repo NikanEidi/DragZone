@@ -12,9 +12,9 @@ import dragonDrag from "./assets/dragon-drag.svg";
 export default function App() {
   const {
     conversations, active, activeId, status,
-    sidebarOpen, sidebarCollapsed,
+    sidebarOpen, sidebarCollapsed, activeContext,
     setActiveId, setSidebarOpen, setSidebarCollapsed,
-    sendMessage, newConversation, deleteConversation, shareConversation,
+    sendMessage, newConversation, deleteConversation, shareConversation, uploadFiles,
   } = useChat();
 
   return (
@@ -133,7 +133,9 @@ export default function App() {
           <ChatArea
             messages={active.messages}
             status={status}
+            contextActive={!!activeContext}
             onSend={sendMessage}
+            onUpload={uploadFiles}
             onShare={shareConversation}
             onToggleSidebar={() => setSidebarOpen(true)}
           />

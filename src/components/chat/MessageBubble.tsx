@@ -1,7 +1,35 @@
 import React, { useState } from "react";
-import { User, Copy, Check, Paperclip } from "lucide-react";
+import { User, Copy, Check, Paperclip, Download } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import type { Message } from "../../types/chat";
 import dragonIcon from "../../assets/dragon-layer.svg";
+
+function downloadSnippet(code: string, language: string) {
+  // Map common languages to extensions
+  const extMap: Record<string, string> = {
+    typescript: 'ts', javascript: 'js', python: 'py', 
+    json: 'json', yaml: 'yml', html: 'html', css: 'css',
+    bash: 'sh', shell: 'sh'
+  };
+  
+  const ext = extMap[language.toLowerCase()] || 'txt';
+  const filename = `snippet-${Date.now()}.${ext}`;
+  
+  const blob = new Blob([code], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 interface Props {
   message: Message;
@@ -76,16 +104,109 @@ export function MessageBubble({ message: m, index }: Props) {
           )}
 
           {/* Content */}
-          <div className="px-[clamp(12px,1.6vw,18px)] py-[clamp(10px,1.2vw,14px)]">
-            <p style={{
-              fontFamily: "system-ui, -apple-system, sans-serif",
-              fontSize: "clamp(13px,1.35vw,15px)",
-              lineHeight: "1.75",
-              color: textColor,
-              letterSpacing: "0.2px",
-            }}>
-              {m.content}
-            </p>
+          <div className="px-[clamp(12px,1.6vw,18px)] py-[clamp(10px,1.2vw,14px)]" style={{ color: textColor }}>
+            {isU ? (
+              <p style={{
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                fontSize: "clamp(13px,1.35vw,15px)",
+                lineHeight: "1.75",
+                letterSpacing: "0.2px",
+                whiteSpace: "pre-wrap"
+              }}>
+                {m.content}
+              </p>
+            ) : (
+              <div className="markdown-body" style={{
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                fontSize: "clamp(13px,1.35vw,15px)",
+                lineHeight: "1.75",
+                letterSpacing: "0.2px",
+              }}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    // Override code rendering for the premium CodeFrame
+                    code({node, inline, className, children, ...props}: any) {
+                      const match = /language-(\w+)/.exec(className || '');
+                      const language = match ? match[1] : '';
+                      const codeString = String(children).replace(/\n$/, '');
+                      
+                      if (!inline && match) {
+                        return (
+                          <div className="my-4 rounded-[12px] overflow-hidden border border-[#333] shadow-lg liquid-glass-dark">
+                            {/* CodeFrame Header */}
+                            <div className="flex items-center justify-between px-4 py-2 bg-zinc-900 border-b border-[#333]">
+                                <span className="text-xs font-mono text-[#00F0FF] lowercase px-2 py-0.5 rounded-[4px] bg-[#00F0FF]/10 border border-[#00F0FF]/20">
+                                    {language}
+                                </span>
+                                <div className="flex gap-2">
+                                    <button 
+                                      onClick={() => {
+                                        navigator.clipboard.writeText(codeString);
+                                        // Visual feedback would require local state here, simplified for inline component
+                                      }}
+                                      className="p-1.5 rounded-[6px] hover:bg-white/10 text-zinc-400 hover:text-[#00F0FF] transition-colors"
+                                      title="Copy Code"
+                                    >
+                                        <Copy size={14} />
+                                    </button>
+                                    <button 
+                                      onClick={() => downloadSnippet(codeString, language)}
+                                      className="p-1.5 rounded-[6px] hover:bg-white/10 text-zinc-400 hover:text-[#B026FF] transition-colors"
+                                      title="Download Snippet"
+                                    >
+                                        <Download size={14} />
+                                    </button>
+                                </div>
+                            </div>
+                            {/* CodeFrame Body */}
+                            <div className="overflow-auto text-[13px] sm:text-[14px] max-h-[500px]" style={{ scrollbarWidth: "thin", scrollbarColor: "#333 #0d1117" }}>
+                                <SyntaxHighlighter
+                                  style={vscDarkPlus}
+                                  language={language}
+                                  PreTag="div"
+                                  customStyle={{ margin: 0, background: '#0d1117', padding: '16px', borderRadius: '0' }}
+                                  {...props}
+                                >
+                                  {codeString}
+                                </SyntaxHighlighter>
+                            </div>
+                          </div>
+                        );
+                      }
+                      
+                      // Inline code
+                      return (
+                        <code className="px-1.5 py-0.5 rounded-[6px] bg-[#00F0FF]/10 text-[#00F0FF] font-mono text-[0.9em] border border-[#00F0FF]/20" {...props}>
+                          {children}
+                        </code>
+                      );
+                    },
+                    
+                    // Table styles for CSV data
+                    table: ({node, ...props}) => <div className="overflow-x-auto my-4"><table className="w-full text-left border-collapse border border-[rgba(255,255,255,0.1)]" {...props} /></div>,
+                    th: ({node, ...props}) => <th className="p-3 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] font-semibold text-[#00F0FF]" {...props} />,
+                    td: ({node, ...props}) => <td className="p-3 border border-[rgba(255,255,255,0.1)]" {...props} />,
+                    
+                    // List styles
+                    ul: ({node, ...props}) => <ul className="list-disc ml-6 my-2 space-y-1" {...props} />,
+                    ol: ({node, ...props}) => <ol className="list-decimal ml-6 my-2 space-y-1" {...props} />,
+                    li: ({node, ...props}) => <li className="pl-1" {...props} />,
+                    
+                    // Header styles
+                    h1: ({node, ...props}) => <h1 className="text-xl font-bold mt-6 mb-3 text-[#00F0FF]" {...props} />,
+                    h2: ({node, ...props}) => <h2 className="text-lg font-bold mt-5 mb-2 text-[#E0E0E0]" {...props} />,
+                    h3: ({node, ...props}) => <h3 className="text-md font-semibold mt-4 mb-2 text-[#E0E0E0]" {...props} />,
+                    
+                    // Standard blocks
+                    p: ({node, ...props}) => <p className="mb-3 last:mb-0" {...props} />,
+                    a: ({node, ...props}) => <a className="text-[#4A9BD9] hover:text-[#00F0FF] underline decoration-[#00F0FF]/30 transition-colors" target="_blank" rel="noopener noreferrer" {...props} />,
+                  }}
+                >
+                  {m.content}
+                </ReactMarkdown>
+              </div>
+            )}
           </div>
 
           {/* Footer */}

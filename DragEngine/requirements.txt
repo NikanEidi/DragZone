@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+pypdf
+ollama
+python-docx
+pandas
+openpyxl
+python-pptx
+beautifulsoup4

@@ -7,115 +7,92 @@
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+---
+
+## 🐉 The Vision
+**DragZone** is an enterprise-grade, multi-modal AI ecosystem built for speed, beauty, and absolute data synthesis. It combines a high-fidelity **Cyberpunk React Architecture** with a modular **FastAPI Omni-Parser Engine**, designed to analyze everything from PDFs and Spreadsheets to live Image feeds and source code.
 
 ---
 
-## 🎨 Visual Philosophy
+## 🚀 Unified Startup (Quick Start)
 
-DragZoneAI is not just a chat interface; it's a digital experience. Drawing inspiration from **Cyberpunk aesthetics** and **Dragon motifs**, the newly overhauled **Ultra-Premium UI** features:
+The entire ecosystem (Frontend + Backend) can now be launched with a single command:
 
-- **Ultra-Premium Dragon Skin Borders**: Thick, multi-layered SVG borders with realistic overlapping reptile scales, procedural bump mapping (`feTurbulence`), and animated cyan/purple energy veins.
-- **Glowing Dragon Eye Ornaments**: Responsive corner pieces with pulsing radial gradients and slit-pupil designs.
-- **Deep Space Aurora Backdrops**: An infinitely breathing multi-layered background system combining dark matter radial gradients and cyberpunk particle fields.
-- **Professional Smoked Liquid Glass**: High-translucency surfaces with 40px backdrop blur, drop shadows, and active hover states reflecting ambient light.
-- **Holographic UI**: Precision SVG icons and glass frames derived entirely from huge, high-fidelity source assets (`UIcomponents`), perfectly optimized for the web.
+```bash
+# 1. Clone & Enter
+git clone https://github.com/NikanEidi/DragZone.git
+cd DragZone
 
----
+# 2. Setup (If first time)
+npm install
+pip install -r DragEngine/requirements.txt
 
-## 🚀 Key Features
+# 3. IGNITE THE DRAGON
+./start_dragon.sh
+```
 
-- **⚡ High-Performance Rendering**: 
-  - **Canvas-based VFX**: Particle fields and smoke effects (CloudVape) run on isolated HTML5 Canvases to maintain 60FPS even on iPadOS.
-  - **GPU Acceleration**: Heavy use of `transform: translate3d()` and `will-change` hints to offload visual debt to the GPU.
-- **🤖 MVC Architecture**: 
-  - **Models**: Type-safe state management in `src/types`.
-  - **Views**: Atomic, reusable components built with Radix UI and Tailwind CSS.
-  - **Controllers**: Logic abstracted into custom React hooks for maximum maintainability.
-- **🐉 Dragon Protocol**: Custom "Dragon" themed status indicators and response patterns.
-- **📱 Fluid Responsiveness**: Uses CSS `clamp()` and internal layout logic to ensure a seamless experience from massive desktop monitors down to iPad Mini.
-- **🔮 Ollama Ready**: Pre-architected with `useOllama` hooks, ready to connect to local LLM endpoints.
+> [!TIP]
+> The `start_dragon.sh` script manages all child processes. Pressing **Ctrl+C** will gracefully kill both the FastAPI engine and the Vite server, preventing ghost processes.
 
 ---
 
-## 🛠️ Technical Stack
+## 🧠 DragEngine: The Omni-Parser
 
-- **Framework**: [React 18](https://reactjs.org/)
-- **Build Tool**: [Vite 6](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with Vite Plugin
-- **UI Components**: [Radix UI](https://www.radix-ui.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **Animations**: CSS Keyframes + Framer Motion (Ready) + Canvas API
+Located in `/DragEngine`, this modular Python service powers the heavy lifting:
 
----
-
-## 📦 Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v18 or newer recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/DragZone.git
-   cd DragZone
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Build for production:
-   ```bash
-   npm run build
-   ```
-
+- **PDF Synthesis**: High-fidelity text extraction via `pypdf`.
+- **Office Suite**: Full support for `.docx` (Word), `.pptx` (PowerPoint), and `.xlsx` (Excel).
+- **Data Tables**: Spreadsheets are parsed into Markdown tables, allowing the AI to reason over tabular data perfectly.
+- **Vision Feed**: Integrated **LLaVA** support for technical image description.
+- **SSE Streaming**: Server-Sent Events deliver AI responses in real-time with a typewriter effect.
 
 ---
 
-## 🧪 Testing & CI/CD
+## 📱 Multi-Device Excellence & Apple Pencil
 
-DragZone AI is built with reliability in mind.
-- **Unit Tests**: `npm run test:unit` to run Jest tests on component logic.
-- **E2E Tests**: `npm run test:e2e:ci` to run Cypress tests headlessly.
-- **CI/CD Pipeline**: GitHub Actions automatically builds, lints, and runs tests for every push to `main` and `feature/enhancement-UI`.
+DragZone is optimized for the professional mobile workspace:
+
+- **iPad Air / Pro Ready**: Precision touch targets (44x44px) and native touch event handling for the **Apple Pencil**.
+- **Responsive Fluidity**: Uses CSS `clamp()` and isolated Canvas rendering to maintain 60FPS on high-refresh mobile displays.
+- **Liquid Glass UI**: Multi-layered SVG frames and recursive scale animations that adapt perfectly to MacBook 14" or iPad Portrait layouts.
 
 ---
 
-## 📂 Project Structure
+## 🧪 Testing Infrastructure
+
+We maintain 100% green coverage across the stack:
+
+| Layer | Environment | Command |
+| :--- | :--- | :--- |
+| **Frontend** | Jest + RTL | `npm run test:unit` |
+| **Backend** | Pytest | `cd DragEngine && pytest` |
+| **Pipeline** | GitHub Actions | Automatic on `main` push |
+
+---
+
+## 📂 Architecture Overview
 
 ```text
 DragZone/
-├── src/
-│   ├── components/      # UI Components (Chat, Layout, Effects)
-│   ├── hooks/           # Logic & Controllers (useChat, useOllama)
-│   ├── types/           # Type Definitions
-│   ├── styles/          # Global CSS & Tailwind Config
-│   ├── assets/          # Static Images & SVGs
-│   └── App.tsx          # Root Application Component
-├── UIcomponents/        # High-Fidelity Asset Frames (246MB+)
-├── index.html           # Entry Point
-├── vite.config.ts       # Vite Configuration
-└── package.json         # Dependencies & Scripts
+├── start_dragon.sh      # Unified Bootloader
+├── src/                 # React Frontend (Vite + TS)
+│   ├── components/      # Glassmorphic UI & VFX
+│   ├── hooks/           # AI Controllers (useChat)
+├── DragEngine/          # FastAPI Engine (Python)
+│   ├── api/routers/     # Modular Endpoints
+│   ├── services/        # Omni-Parser Logic
+│   ├── core/            # LLM Proxy Client
+├── UIcomponents/        # UHD Source Assets
+└── .github/workflows/   # CI/CD (Node + Python)
 ```
 
 ---
 
 ## 👨‍💻 Author
-
 **Nikan Eidi**  
-*Lead Architect & Designer*
+*Principal Architect & UI Designer*
 
 ---
 
 ## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - 2026 DragZone Protocol.

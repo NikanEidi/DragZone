@@ -44,3 +44,15 @@ pnpm-debug.log*
 # Project specific
 # Note: UIcomponents is large (246MB), consider if specifically needed for version control
 # /UIcomponents/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Jest Mocks (Temporary Fix for ESM imports)
+/__mocks__/
+

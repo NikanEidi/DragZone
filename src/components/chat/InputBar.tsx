@@ -5,23 +5,24 @@ import { uid } from "../../hooks/useChat";
 
 interface Props {
   onSend: (text: string, attachments?: Attachment[]) => void;
+  onUpload: (files: FileList) => Promise<boolean>;
   onShare: () => void;
   hasMessages: boolean;
+  isContextLoaded: boolean;
 }
 
-export function InputBar({ onSend, onShare, hasMessages }: Props) {
+export function InputBar({ onSend, onUpload, onShare, hasMessages, isContextLoaded }: Props) {
   const [input, setInput] = useState("");
   const [sendHov, setSendHov] = useState(false);
   const [attachHov, setAttachHov] = useState(false);
   const [shareHov, setShareHov] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
   
-  const [ptr, setPtr] = useState({ x: 50, y: 50 });
   const barRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
-  const ptrRef = useRef({ x: 50, y: 50 });
   const glowRef = useRef<HTMLDivElement>(null);
 
   const has = input.trim().length > 0 || attachments.length > 0;
@@ -35,16 +36,24 @@ export function InputBar({ onSend, onShare, hasMessages }: Props) {
     inputRef.current?.focus();
   }, [input, attachments, onSend]);
 
-  const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files) return;
-    const newAtts: Attachment[] = Array.from(files).map(f => ({
-      id: uid(), name: f.name, size: f.size, type: f.type,
-    }));
-    setAttachments(prev => [...prev, ...newAtts]);
+    if (!files || files.length === 0) return;
+    
+    setIsUploading(true);
+    const success = await onUpload(files);
+    
+    if (success) {
+      const newAtts: Attachment[] = Array.from(files).map(f => ({
+        id: uid(), name: f.name, size: f.size, type: f.type,
+      }));
+      setAttachments(prev => [...prev, ...newAtts]);
+    }
+    
+    setIsUploading(false);
     e.target.value = "";
     setMenuOpen(false);
-  }, []);
+  }, [onUpload]);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -87,6 +96,17 @@ export function InputBar({ onSend, onShare, hasMessages }: Props) {
           transform: has ? "translateY(-2px)" : "translateY(0)"
         }}
       >
+        {/* Status indicator for Context */}
+        {(isUploading || isContextLoaded) && (
+            <div className="absolute top-0 right-6 px-3 py-1 rounded-b-[8px] z-20 flex items-center gap-2 animate-[fadeSlideIn_0.3s_ease-out]"
+                 style={{ background: isUploading ? "rgba(176,38,255,0.1)" : "rgba(0,240,255,0.1)", border: isUploading ? "1px solid rgba(176,38,255,0.2)" : "1px solid rgba(0,240,255,0.2)", borderTop: "none" }}>
+                <div className={`w-1.5 h-1.5 rounded-full ${isUploading ? 'animate-pulse bg-[#B026FF]' : 'bg-[#00F0FF]'}`} />
+                <span style={{ fontSize: '10px', fontWeight: 600, color: isUploading ? '#B026FF' : '#00F0FF', letterSpacing: '1px' }}>
+                    {isUploading ? 'PROCESSING CONTEXT...' : 'CONTEXT SYNCED'}
+                </span>
+            </div>
+        )}
+
         {/* Subtle Inner Glow on Focus */}
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,240,255,0.03)] to-[rgba(176,38,255,0.03)] pointer-events-none opacity-0 transition-opacity duration-300" style={{ opacity: has ? 1 : 0 }} />
 
@@ -96,8 +116,10 @@ export function InputBar({ onSend, onShare, hasMessages }: Props) {
         {/* Dynamic Pointer Glow (Fast CSS) - Professional, subtle */}
         <div ref={glowRef} className="absolute inset-0 rounded-[24px] pointer-events-none transition-opacity duration-200 mix-blend-screen z-0"
           style={{
-            background: `radial-gradient(circle 120px at 50% 50%, rgba(255,255,255,0.08), transparent 100%)`,
-            opacity: has ? 0.8 : 0.4,
+            background: isUploading 
+                ? `radial-gradient(circle 120px at 50% 50%, rgba(176,38,255,0.15), transparent 100%)`
+                : `radial-gradient(circle 120px at 50% 50%, rgba(255,255,255,0.08), transparent 100%)`,
+            opacity: has || isUploading ? 0.8 : 0.4,
             willChange: 'background, opacity'
           }}
         />
@@ -129,13 +151,13 @@ export function InputBar({ onSend, onShare, hasMessages }: Props) {
               onClick={() => setMenuOpen(!menuOpen)}
               onMouseEnter={() => setAttachHov(true)}
               onMouseLeave={() => setAttachHov(false)}
-              className="p-2.5 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center"
+              className="p-3 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
               style={{
                 background: menuOpen ? "rgba(255,255,255,0.08)" : "transparent",
                 color: attachHov || menuOpen ? "#00F0FF" : "#666",
               }}
             >
-              <Plus size={20} style={{ 
+              <Plus size={22} style={{ 
                 transform: menuOpen ? "rotate(45deg)" : "rotate(0)", 
                 transition: "transform 0.2s ease-out",
               }} />
@@ -197,11 +219,11 @@ export function InputBar({ onSend, onShare, hasMessages }: Props) {
                 onClick={onShare}
                 onMouseEnter={() => setShareHov(true)}
                 onMouseLeave={() => setShareHov(false)}
-                className="p-2.5 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center"
+                className="p-3 rounded-[12px] transition-all duration-200 ease-out active:scale-[0.95] flex items-center justify-center min-w-[44px] min-h-[44px]"
                 style={{ color: shareHov ? "#4A9BD9" : "#666" }}
                 title="Share Context"
               >
-                <Share2 size={18} />
+                <Share2 size={20} />
               </button>
             )}
 
@@ -210,14 +232,14 @@ export function InputBar({ onSend, onShare, hasMessages }: Props) {
               onMouseEnter={() => setSendHov(true)}
               onMouseLeave={() => setSendHov(false)}
               disabled={!has}
-              className="p-2.5 rounded-[12px] transition-all duration-300 ease-out active:scale-[0.95] flex items-center justify-center relative overflow-hidden group"
+              className="p-3 rounded-[12px] transition-all duration-300 ease-out active:scale-[0.95] flex items-center justify-center relative overflow-hidden group min-w-[44px] min-h-[44px]"
               style={{
                 background: has ? "rgba(0, 240, 255, 0.1)" : "transparent",
                 color: has ? "#00F0FF" : "#444",
                 cursor: has ? "pointer" : "default",
               }}
             >
-              <Send size={18} style={{
+              <Send size={20} style={{
                 transform: sendHov && has ? "translateX(2px) translateY(-2px)" : "translateX(0) translateY(0)",
                 transition: "all 0.2s ease-out"
               }} />
