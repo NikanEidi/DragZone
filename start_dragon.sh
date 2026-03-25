@@ -10,10 +10,10 @@ echo -e "${CYAN}${BOLD}═══ DRAFZONE ENGINE ═══${NC}"
 echo ""
 
 # Kill any existing processes on our ports
-for PORT in 8000 5173; do
+for PORT in 8000 3000; do
   PID=$(lsof -ti:$PORT 2>/dev/null || true)
   if [ -n "$PID" ]; then
-    echo -e "${RED}Killing process on port $PORT (PID: $PID)${NC}"
+    echo -e "${RED}Force killing process on port $PORT (PID: $PID)${NC}"
     kill -9 $PID 2>/dev/null || true
   fi
 done
@@ -38,15 +38,16 @@ BACK_PID=$!
 cd ..
 
 # Start frontend
-echo -e "${GREEN}▸ Starting Vite frontend on 0.0.0.0:5173${NC}"
-npx vite --host 0.0.0.0 --port 5173 &
+echo -e "${GREEN}▸ Starting Vite frontend on 0.0.0.0:3000${NC}"
+# Use explicit directory to avoid ENOENT if run from outside
+(cd /Users/kuroko/Desktop/DragZone && npm run dev -- --host 0.0.0.0) &
 FRONT_PID=$!
 
 sleep 2
 echo ""
 echo -e "${CYAN}${BOLD}════════════════════════════════════════${NC}"
-echo -e "${CYAN}  MacBook:  http://localhost:5173${NC}"
-echo -e "${CYAN}  iPad/LAN: http://${LOCAL_IP}:5173${NC}"
+echo -e "${CYAN}  MacBook:  http://localhost:3000${NC}"
+echo -e "${CYAN}  iPad/LAN: http://${LOCAL_IP}:3000${NC}"
 echo -e "${CYAN}  API:      http://${LOCAL_IP}:8000/docs${NC}"
 echo -e "${CYAN}${BOLD}════════════════════════════════════════${NC}"
 echo ""
