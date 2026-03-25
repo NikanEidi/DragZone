@@ -41,7 +41,7 @@ export const Sidebar = React.memo(function Sidebar({ conversations, activeId, on
           background: "var(--bg-panel, rgba(14,17,23,0.95))",
           borderRight: "1px solid var(--border, rgba(255,255,255,0.06))",
           transform: open ? "translateX(0)" : `translateX(-100%)`,
-          transition: "transform 150ms ease-out, width 150ms ease-out",
+          transition: "transform 100ms ease-out, width 100ms ease-out",
           willChange: "transform",
         }}
       >

@@ -55,6 +55,11 @@ export const Header = React.memo(function Header({ status }: Props) {
         <div className="w-1.5 h-1.5 rounded-full" style={{ background: statusColor }} />
         <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 9, color: "var(--text-secondary, #8B949E)" }}>{statusText}</span>
       </div>
+
+      {/* Dragon Head — Top Right Decor */}
+      <div className="absolute top-0 right-0 p-2 opacity-20 pointer-events-none">
+        <img src={dragonHead} alt="" style={{ width: 20, height: 20 }} />
+      </div>
     </header>
   );
 });
